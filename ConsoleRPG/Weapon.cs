@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+
+/*  Weapon class - blueprint for a weapon.
+ *  Actuall weapons are created by the Datalib class */
+
 namespace ConsoleRPG
 {
     public class Weapon
@@ -10,14 +14,7 @@ namespace ConsoleRPG
         public int critChance;
         public int critMult;
         public string name;
-        //string[] weaponNames = new string[] { "Axe", "Sword", "Dagger", "Spear" };
-        //public Weapon()
-        //{
-        //    Random rnd = new Random();
-        //    name = weaponNames[rnd.Next(0, weaponNames.Length)];
-        //    damage = rnd.Next(5, 9);
-        //    attackSpeed = rnd.Next(1, 3);
-        //}
+
         public Weapon(string wName, int minDmg, int maxDmg, int critC, int critD)
         {
             name = wName;

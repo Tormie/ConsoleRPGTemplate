@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+
+/*  Enemy class - extends Character class
+ *  Contains all data and functionality for the enemies in the game.
+ *  Probably needs some refactoring, some overlap with Character and Player might occur */
+
 namespace ConsoleRPG
 {
     public class Enemy : Character

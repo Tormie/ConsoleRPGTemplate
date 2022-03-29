@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+
+/*  PlayerClass class - blueprint for a player character class.
+ *  Actuall classes are created by the Datalib class */
+
 namespace ConsoleRPG
 {
     public class PlayerClass

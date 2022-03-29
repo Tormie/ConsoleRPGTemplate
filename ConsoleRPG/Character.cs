@@ -1,4 +1,8 @@
 ﻿using System;
+
+/*  Character class, base class for Enemies and Player
+ *  Needs refactoring, a lot of overlap is still happening */
+
 namespace ConsoleRPG
 {
     public class Character

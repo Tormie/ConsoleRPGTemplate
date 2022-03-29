@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+
+/*  PlayerSkill class - blueprint for a player character skills.
+ *  Actuall skills are created by the Datalib class */
+
 namespace ConsoleRPG
 {
     public class PlayerSkill

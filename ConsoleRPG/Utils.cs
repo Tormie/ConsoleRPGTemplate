@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
+/*  Utils class - houses some utilitary functions */
+
 namespace ConsoleRPG
 {
     public class Utils

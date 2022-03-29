@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+
+/*  Encounter class - contains all data and functionality for the games' encounters.
+ *  Currently it only handles combat encounters. */
+
 namespace ConsoleRPG
 {
     public class Encounter

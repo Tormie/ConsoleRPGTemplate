@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+
+/*  Main program - activates utils and datalib
+ *  runs the game
+ *  Game logic might have to be moved to a separate class */
+
 namespace ConsoleRPG
 {
     class Program

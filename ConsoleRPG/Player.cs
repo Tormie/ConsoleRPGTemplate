@@ -1,5 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+
+/*  Player class - extends Character class
+ *  Contains all data and functionality for the player.
+ *  Contains chosen class, weapon and leveling
+ *  Probably needs some refactoring, some overlap with Character and Enemy might occur */
+
 namespace ConsoleRPG
 {
     public class Player : Character
@@ -139,8 +145,6 @@ namespace ConsoleRPG
                 }
                 target.TakeDamage(damage);
             }
-            //Program.ut.EnterToCont();
-            //Console.Clear();
         }
 
         public override void Die()

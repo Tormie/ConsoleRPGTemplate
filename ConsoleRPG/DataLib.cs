@@ -1,6 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+
+/*  Datalib class, reads and stores all the data from the input text files stored in the Data folder.
+ *  If a class is expanded, the Read... function probably also needs some work */
+
 namespace ConsoleRPG
 {
     public class DataLib
