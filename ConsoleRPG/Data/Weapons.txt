@@ -1,0 +1,6 @@
+/ You can add weapons to this file (Name, min damage, max damage, crit chance, crit multiplier) Don't remove this line
+/ You can use the / symbol to add commentary to this file.
+Sword, 2, 6,10,2
+Axe, 1, 10,5,3
+Dagger, 3, 4,15,2
+Staff, 2, 8,5,2

@@ -1,0 +1,7 @@
+/ You can add enemies to this file (HP, name, hands(for weapons)) Don't remove this line
+/ You can use the / symbol to add commentary to this file.
+50,Construct, 3,5,25
+15,Goblin, 1,0,75
+25,Ratman, 1,1,65
+35,Orc, 1,2,60
+30,Hobgoblin, 2,1,50

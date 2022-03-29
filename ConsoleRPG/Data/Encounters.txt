@@ -1,0 +1,12 @@
+/ You can add encounters to this file Don't remove these lines
+/ For combat encounters use: (name;intro;outtro)
+/ For non-combat encounters use: (name;intro;outtro;effect;strength)
+/ You can use the / symbol to add commentary to this file.
+Ambush;1You walk into a dimly lit cave, cautious as ever you proceed slowly. Suddenly you see movement, monsters appear!;Ambush flavor outtro text!;true
+Ambush;2You walk into a dimly lit cave, cautious as ever you proceed slowly. Suddenly you see movement, monsters appear!;Ambush flavor outtro text!;true
+Ambush;3You walk into a dimly lit cave, cautious as ever you proceed slowly. Suddenly you see movement, monsters appear!;Ambush flavor outtro text!;true
+Ambush;4You walk into a dimly lit cave, cautious as ever you proceed slowly. Suddenly you see movement, monsters appear!;Ambush flavor outtro text!;true
+Ambush;5You walk into a dimly lit cave, cautious as ever you proceed slowly. Suddenly you see movement, monsters appear!;Ambush flavor outtro text!;true
+Ambush;6You walk into a dimly lit cave, cautious as ever you proceed slowly. Suddenly you see movement, monsters appear!;Ambush flavor outtro text!;true
+Healing spring;Healing spring flavor intro text!;Healing spring flavor outtro text!;healing;50
+Ethereal Blacksmith;Upgrade flavor intro text!;Upgrade flavor outtro text!;upgrade;1

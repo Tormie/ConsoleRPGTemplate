@@ -1,0 +1,32 @@
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.exe
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.deps.json
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.runtimeconfig.json
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.runtimeconfig.dev.json
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.dll
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\bin\Debug\net5.0\ref\ConsoleRPG.dll
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.pdb
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.csprojAssemblyReference.cache
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.GeneratedMSBuildEditorConfig.editorconfig
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.AssemblyInfoInputs.cache
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.AssemblyInfo.cs
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.csproj.CoreCompileInputs.cache
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.dll
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\obj\Debug\net5.0\ref\ConsoleRPG.dll
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.pdb
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ClassesExpanded - Copy\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.genruntimeconfig.cache
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.exe
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.deps.json
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.runtimeconfig.json
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.runtimeconfig.dev.json
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.dll
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\bin\Debug\net5.0\ref\ConsoleRPG.dll
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\bin\Debug\net5.0\ConsoleRPG.pdb
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.csprojAssemblyReference.cache
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.GeneratedMSBuildEditorConfig.editorconfig
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.AssemblyInfoInputs.cache
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.AssemblyInfo.cs
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.csproj.CoreCompileInputs.cache
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.dll
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\obj\Debug\net5.0\ref\ConsoleRPG.dll
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.pdb
+E:\Onedrive\OneDrive - Noorderpoort\Programming\CS\Assignments\Classes\ConsoleRPG\ConsoleRPG\obj\Debug\net5.0\ConsoleRPG.genruntimeconfig.cache
