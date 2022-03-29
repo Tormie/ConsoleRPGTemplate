@@ -11,7 +11,8 @@ namespace ConsoleRPG
          *  Strength manages melee damage
          *  Agility manages to hit and/or dodge
          *  Constitution manages hit points
-         *  Intelligence manages magic damage   */
+         *  Intelligence manages magic damage
+         *  For now, we're using values 1-9 with 5 being average for a 0 bonus/malus */
         public int strength;
         public int agility;
         public int constitution;
@@ -28,6 +29,15 @@ namespace ConsoleRPG
         public string name;
         public bool isAlive = true;
         public int level = 1;
+
+        public void SetStats()
+        {
+            meleeDmgMod = strength - 5;
+            toHitMod = agility - 5;
+            dodgeMod = agility - 5;
+            hpMod = constitution - 5;
+            magicDmgMod = intelligence - 5;
+        }
 
         public void TakeDamage(int damage)
         {
