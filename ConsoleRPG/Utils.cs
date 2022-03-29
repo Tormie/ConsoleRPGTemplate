@@ -49,7 +49,8 @@ namespace ConsoleRPG
         public void PrintCharacterSheet(Enemy target)
         {
             PrintHorizontalLine();
-            Console.WriteLine("Name:           " + target.name + "   Level: " + target.level);
+            Console.WriteLine("Name:         " + target.name + "   Level: " + target.level);
+            Console.WriteLine("Hit Points:   " + target.hp + "/" + target.baseHP);
             PrintHorizontalLine();
             Console.WriteLine("Strength:     " + target.strength + "   Melee Damage modifier: " + target.meleeDmgMod);
             Console.WriteLine("Agility:      " + target.agility + "   To Hit modifier: " + target.toHitMod);
@@ -61,6 +62,21 @@ namespace ConsoleRPG
             {
                 Console.WriteLine("Weapon:       " + w.name + "   Damage: " + w.dmgMin + "-" + w.dmgMax);
             }
+        }
+
+        public void PrintCharacterSheet(ModularEnemy target)
+        {
+            PrintHorizontalLine();
+            Console.WriteLine("Name:         " + target.name + "   Level: " + target.level);
+            Console.WriteLine("Hit Points:   " + target.hp + "/" + target.baseHP);
+            PrintHorizontalLine();
+            Console.WriteLine("Strength:     " + target.strength + "   Melee Damage modifier: " + target.meleeDmgMod);
+            Console.WriteLine("Agility:      " + target.agility + "   To Hit modifier: " + target.toHitMod);
+            Console.WriteLine("                      Dodge modifier: " + target.dodgeMod);
+            Console.WriteLine("Constitution: " + target.constitution + "   Hit Points Modifier: " + target.hpMod);
+            Console.WriteLine("Intelligence: " + target.intelligence + "   Magic Damage modifier: " + target.magicDmgMod);
+            PrintHorizontalLine();
+            Console.WriteLine("Weapon:       " + target.wieldedWeapon.name + "   Damage: " + target.wieldedWeapon.dmgMin + "-" + target.wieldedWeapon.dmgMax);
         }
 
         public void PrintHorizontalLine()

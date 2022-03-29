@@ -13,6 +13,7 @@ namespace ConsoleRPG
         public int encounterLevel;
         public bool isCombatEncounter = false;
         public List<Enemy> enemyList;
+        public List<ModularEnemy> modEnemyList;
         int enemyHP = 0;
         public bool enemiesDefeated = false;
         public int encounterXP;
@@ -43,6 +44,7 @@ namespace ConsoleRPG
             encounterLevel = Program.player.level + encRnd.Next(0, 3) - 1;
             if (isCombatEncounter)
             {
+                //PopulateEncounter();
                 enemyList = new List<Enemy>();
                 Random rnd = new Random();
                 for (int i = 1; i <= encounterLevel/3+1; i++)
@@ -57,6 +59,25 @@ namespace ConsoleRPG
                     e.isAlive = true;
                     e.hp = e.baseHP;
                 }
+            }
+        }
+
+        void PopulateEncounter()
+        {
+            modEnemyList = new List<ModularEnemy>();
+            Random rnd = new Random();
+            for (int i = 1; i <= encounterLevel / 3 + 1; i++)
+            {
+                ModularEnemy m = new ModularEnemy();
+                Enemy e = Program.dl.enemyList[rnd.Next(0, Program.dl.enemyList.Count)].Clone();
+                e.level = Program.player.level;
+                e.setLevel();
+                enemyList.Add(e);
+            }
+            foreach (Enemy e in enemyList)
+            {
+                e.isAlive = true;
+                e.hp = e.baseHP;
             }
         }
 

@@ -77,7 +77,7 @@ namespace ConsoleRPG
             System.Threading.Thread.Sleep(250);
             Console.Clear();
             Console.WriteLine(name + "! Please choose your class.");
-            foreach (Class p in Program.dl.classList)
+            foreach (Class p in Program.dl.classList.Value)
             {
                 Console.WriteLine("Name " + p.className);
                 Console.WriteLine("HP " + p.classBaseHP);
@@ -93,7 +93,7 @@ namespace ConsoleRPG
             }
             Program.ut.TypeLine("Please enter the name of the class you choose to be:");
             string playerChoice = Console.ReadLine().ToLower();
-            foreach (Class p in Program.dl.classList)
+            foreach (Class p in Program.dl.classList.Value)
             {
                 if (p.className.ToLower() == playerChoice)
                 {

@@ -44,6 +44,8 @@ namespace ConsoleRPG
             dodgeMod = agility - 5;
             hpMod = constitution - 5 + characterClass.classHPPerLevel;
             magicDmgMod = intelligence - 5;
+            baseHP = hp + hpMod;
+            hp = baseHP;
         }
 
         public void TakeDamage(int damage)
