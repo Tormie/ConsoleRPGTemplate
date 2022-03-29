@@ -11,19 +11,25 @@ namespace ConsoleRPG
     {
         public List<Weapon> playerWeaponList;
         public List<PlayerClass> playerClassesList;
+        public List<Class> classList;
         public List<Enemy> enemyList;
         public List<PlayerSkill> playerSkillList;
+        public List<Skill> skillList;
         public List<Encounter> encounterList;
         public List<String> levelUpMessages;
+        public List<Race> raceList;
 
         string dataFolder = @"../../../Data/";
 
         public DataLib()
         {
             ReadLevelUpLines();
-            ReadWeapons();
+            ReadRaces();
             ReadPlayerSkills();
+            ReadSkills();
             ReadPlayerClasses();
+            ReadClasses();
+            ReadWeapons();
             ReadEnemies();
             ReadEncounters();
             Program.ut.TypeLine("Done loading, press enter to continue");
@@ -40,6 +46,26 @@ namespace ConsoleRPG
                 if (s[0] != '/')
                 {
                     levelUpMessages.Add(s);
+                }
+            }
+        }
+
+        void ReadRaces()
+        {
+            Program.ut.TypeLine("Loading races");
+            string[] raceLines = System.IO.File.ReadAllLines(Path.Combine(dataFolder, "Races.txt"));
+            raceList = new List<Race>();
+            foreach (string s in raceLines)
+            {
+                if (s[0] != '/')
+                {
+                    string[] raceParts = s.Split(',');
+                    string rName = raceParts[0];
+                    int rStr = Int32.Parse(raceParts[1]);
+                    int rAgi = Int32.Parse(raceParts[2]);
+                    int rCon = Int32.Parse(raceParts[3]);
+                    int rInt = Int32.Parse(raceParts[4]);
+                    raceList.Add(new Race(rName,rStr,rAgi,rCon,rInt));
                 }
             }
         }
@@ -86,6 +112,28 @@ namespace ConsoleRPG
             }
         }
 
+        void ReadSkills()
+        {
+            Program.ut.TypeLine("Loading skills");
+            string[] skillLines = System.IO.File.ReadAllLines(Path.Combine(dataFolder, "Skills.txt"));
+            skillList = new List<Skill>();
+            foreach (string s in skillLines)
+            {
+                if (s[0] != '/')
+                {
+                    string[] skillParts = s.Split(',');
+                    string skillName = skillParts[0];
+                    string skillDesc = skillParts[1];
+                    string skillUse = skillParts[2];
+                    int skillCD = Int32.Parse(skillParts[3]);
+                    int skillDmgMod = Int32.Parse(skillParts[4]);
+                    int skillClass = Int32.Parse(skillParts[5]);
+                    bool skillAll = bool.Parse(skillParts[6]);
+                    skillList.Add(new Skill(skillName, skillDesc, skillUse, skillCD, skillDmgMod, skillClass, skillAll));
+                }
+            }
+        }
+
         void ReadPlayerClasses()
         {
             Program.ut.TypeLine("Loading classes");
@@ -103,6 +151,29 @@ namespace ConsoleRPG
                     int classDPL = Int32.Parse(classParts[4]);
                     int classID = Int32.Parse(classParts[5]);
                     playerClassesList.Add(new PlayerClass(className, classBHP, classBDM, classHPL, classDPL, new List<PlayerSkill>(playerSkillList.FindAll(PlayerSkill => PlayerSkill.playerClassID == classID))));
+                }
+            }
+        }
+
+        void ReadClasses()
+        {
+            Program.ut.TypeLine("Loading classes");
+            string[] classLines = System.IO.File.ReadAllLines(Path.Combine(dataFolder, "Classes.txt"));
+            classList = new List<Class>();
+            foreach (string s in classLines)
+            {
+                if (s[0] != '/')
+                {
+                    string[] classParts = s.Split(',');
+                    string className = classParts[0];
+                    int classBHP = Int32.Parse(classParts[1]);
+                    int classHPL = Int32.Parse(classParts[2]);
+                    int classSMod = Int32.Parse(classParts[3]);
+                    int classAMod = Int32.Parse(classParts[4]);
+                    int classCMod = Int32.Parse(classParts[5]);
+                    int classIMod = Int32.Parse(classParts[6]);
+                    int classID = Int32.Parse(classParts[7]);
+                    classList.Add(new Class(className, classBHP, classHPL, classSMod, classAMod, classCMod, classIMod, new List<Skill>(skillList.FindAll(Skill => Skill.classID == classID))));
                 }
             }
         }

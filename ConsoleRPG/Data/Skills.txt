@@ -1,0 +1,6 @@
+/ You can add skills to this file (Name, description, skill use flavor text, cooldown, damage multiplier, class, targets all) Don't remove this line
+/ You can use the / symbol to add commentary to this file.
+Bash,Bash: Bash an enemy with terrible force - doing base * 5 damage. 2 turn cooldown.,Using all your strength - you barrel into the , 2, 5, 1, false
+Block,Block: Block incoming damage using a shield. No cooldown.,You expertly use your shield to block the attack(s), 0, 0, 1, true
+Fire bolt,Fire bolt: calling up the arcane forces - you blast the enemy with a scorching firebolt - doing base * 4 damage. 1 turn cooldown.,You throw a mighty firebolt at the , 1, 4, 2, false
+Frost Nova,Frost Nova: Freeze the enemy characters for 1 - 4 turns. 4 turn cooldown.,You channel your inner chill to conjure up an expanding ring of ice. This freezes the enemies for several turns., 4, 4, 2, true

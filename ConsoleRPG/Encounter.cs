@@ -64,11 +64,13 @@ namespace ConsoleRPG
         {
             while (enemiesDefeated == false)
             {
-                Console.WriteLine("Player: " + Program.player.hp + "/" + (Program.player.baseHP + Program.player.playerClass.classHPPerLevel * (Program.player.level-1)));
+                Console.WriteLine("Player: " + Program.player.hp + "/" + (Program.player.baseHP + Program.player.characterClass.classHPPerLevel * (Program.player.level-1)));
                 Console.WriteLine("Level: " + Program.player.level);
                 Console.WriteLine("Weapon: " + Program.player.playerWeapon.name + "("+Program.player.playerWeapon.dmgMin+"-"+Program.player.playerWeapon.dmgMax+
                     "). Damage Modifier: " + Program.player.playerDamageMod);
-                Console.WriteLine("---------------------");
+                Console.WriteLine("-----------");
+                Console.WriteLine("| Enemies |");
+                Console.WriteLine("-----------");
                 foreach (Enemy e in enemyList)
                 {
                     if (e.hp > 0)

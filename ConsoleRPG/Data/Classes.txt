@@ -1,0 +1,6 @@
+/ You can add skillsto this file (Name, base HP, HP per level, strength mod, agility mod, constitution mod, intelligence mod, class ID(incremental)) Don't remove this line
+/ You can use the / symbol to add commentary to this file.
+Warrior, 100, 10, 2,0,0,0,1
+Mage, 50, 3, 0,0,0,2,2
+Rogue, 75, 5, 0,2,0,0,3
+Cleric, 80, 10, 1,0,1,0,4

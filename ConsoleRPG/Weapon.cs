@@ -10,7 +10,6 @@ namespace ConsoleRPG
     {
         public int damage = 0;
         public int dmgMin, dmgMax = 0;
-        int attackSpeed = 1;
         public int critChance;
         public int critMult;
         public string name;
@@ -22,6 +21,12 @@ namespace ConsoleRPG
             dmgMax = maxDmg;
             critChance = critC;
             critMult = critD;
+        }
+
+        public Weapon Clone()
+        {
+            Weapon w = new Weapon(this.name, this.dmgMin, this.dmgMax, this.critChance, this.critMult);
+            return w;
         }
     }
 }

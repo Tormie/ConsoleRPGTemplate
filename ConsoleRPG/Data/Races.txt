@@ -1,0 +1,10 @@
+/ You can add races to this file (name, strength modifier, agility modifier, constitution modifier, intelligence modifier) Don't remove this line
+/ Try and keep modifiers to a added max of +2 for balance sake
+/ You can use the / symbol to add commentary to this file.
+Human, 0,1,0,1
+Orc, 2,-1,2,-1
+Goblin, -1,3,0,0
+Hobgoblin, 3,-1,2,-2
+Construct,4,-2,2,-2
+Elemental,-2,4,-2,2
+Genie,-2,2,-2,4

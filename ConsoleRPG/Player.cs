@@ -33,11 +33,43 @@ namespace ConsoleRPG
         {
             Console.Clear();
             level++;
-            hp = playerClass.classBaseHP + playerClass.classHPPerLevel * (level - 1);
-            playerDamageMod = playerClass.classDmgMod + playerClass.classDmgPerLevel * (level - 1);
+            hp = characterClass.classBaseHP + hpMod * (level - 1);
             Random msg = new Random();
             Program.ut.TypeLine(Program.dl.levelUpMessages[msg.Next(0, Program.dl.levelUpMessages.Count)]);
-            Program.ut.TypeLine("You have reached level " + level + ". Your HP has increased to " + hp + " and your damage modifier to " + playerDamageMod);
+            Program.ut.TypeLine("You have reached level " + level + ". Your HP has increased to " + hp + ".");
+        }
+
+        public void InitPlayer()
+        {
+            ChooseRace();
+            ChooseClass();
+            ChooseWeapon();
+            SetStats();
+        }
+
+        public void ChooseRace()
+        {
+            System.Threading.Thread.Sleep(250);
+            Console.Clear();
+            Console.WriteLine(name + "! Please choose your race.");
+            foreach (Race p in Program.dl.raceList)
+            {
+                Console.WriteLine("Name " + p.raceName);
+                Console.Write("Str: " + p.raceStrMod + " Agi: " + p.raceAgiMod + "\n");
+                Console.Write("Con: " + p.raceConMod + " Int: " + p.raceIntMod + "\n");
+                Console.WriteLine("---------------------");
+            }
+            Program.ut.TypeLine("Please enter the name of the race you choose to be:");
+            string playerChoice = Console.ReadLine().ToLower();
+            foreach (Race p in Program.dl.raceList)
+            {
+                if (p.raceName.ToLower() == playerChoice)
+                {
+                    characterRace = p;
+                }
+            }
+            Program.ut.TypeLine("You chose to be a " + characterRace.raceName);
+            Program.ut.EnterToCont();
         }
 
         public void ChooseClass()
@@ -45,29 +77,32 @@ namespace ConsoleRPG
             System.Threading.Thread.Sleep(250);
             Console.Clear();
             Console.WriteLine(name + "! Please choose your class.");
-            foreach(PlayerClass p in Program.dl.playerClassesList)
+            foreach (Class p in Program.dl.classList)
             {
-                Console.WriteLine("Name "+p.className);
+                Console.WriteLine("Name " + p.className);
                 Console.WriteLine("HP " + p.classBaseHP);
-                foreach(PlayerSkill ps in p.playerSkillList)
+                Console.Write("Str: " + p.classStrMod + " Agi: " + p.classAgiMod + "\n");
+                Console.Write("Con: " + p.classConMod + " Int: " + p.classIntMod + "\n");
+                Console.Write("Skills: ");
+                foreach (Skill ps in p.skillList)
                 {
-                    Console.WriteLine("Skill: " + ps.skillName);
+                    Console.Write(ps.skillName+ "  ");
                 }
+                Console.WriteLine();
                 Console.WriteLine("---------------------");
             }
             Program.ut.TypeLine("Please enter the name of the class you choose to be:");
             string playerChoice = Console.ReadLine().ToLower();
-            foreach (PlayerClass p in Program.dl.playerClassesList)
+            foreach (Class p in Program.dl.classList)
             {
                 if (p.className.ToLower() == playerChoice)
                 {
-                    playerClass = p;
+                    characterClass = p;
                 }
             }
-            Program.ut.TypeLine("Congratulations! You are now a mighty " + playerClass.className);
-            baseHP = playerClass.classBaseHP;
-            hp = playerClass.classBaseHP;
-            playerDamageMod = playerClass.classDmgMod;
+            Program.ut.TypeLine("Congratulations! You are now a mighty " + characterClass.className);
+            baseHP = characterClass.classBaseHP;
+            hp = characterClass.classBaseHP;
             Program.ut.EnterToCont();
         }
 
@@ -75,7 +110,7 @@ namespace ConsoleRPG
         {
             System.Threading.Thread.Sleep(250);
             Console.Clear();
-            Console.WriteLine("Mighty "+playerClass.className + " "+ name + "! Please select your weapon of choice.");
+            Console.WriteLine("Mighty "+characterClass.className + " "+ name + "! Please select your weapon of choice.");
             foreach(Weapon w in Program.dl.playerWeaponList)
             {
                 Console.WriteLine(w.name + " doing " + w.dmgMin + " to " + w.dmgMax + " damage. Crit Chance: "+w.critChance+" for "+w.critMult+" times damage.");
@@ -87,19 +122,29 @@ namespace ConsoleRPG
             {
                 if (w.name.ToLower() == playerChoice)
                 {
-                    playerWeapon = w;
+                    playerWeapon = w.Clone();
                 }
             }
             Program.ut.TypeLine("You have chosen to wield a " + playerWeapon.name + ". It does " + playerWeapon.dmgMin + " to " + playerWeapon.dmgMax + " damage.");
             Program.ut.EnterToCont();
+            Console.Clear();
         }
 
         public void PlayerAttack()
         {
             Console.WriteLine("What do you do?");
-            Console.WriteLine("Use your (S)kill or (A)ttack with your weapon.");
+            Console.WriteLine("(A)ttack with your weapon, use a (S)kill or view (C)haracter sheet.");
             Enemy target = null;
             string playerInput = Console.ReadLine();
+            if (playerInput.ToLower() == "c")
+            {
+                Console.Clear();
+                Program.ut.PrintCharacterSheet(Program.player);
+                Program.ut.EnterToCont();
+                Console.Clear();
+                PlayerAttack();
+            }
+
             if (playerInput.ToLower() == "s")
             {
                 Console.WriteLine("Which skill do you want to use?(Type Back to return)");
@@ -135,12 +180,12 @@ namespace ConsoleRPG
                 int damage;
                 if (bCrit == true)
                 {
-                    damage = (rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + playerDamageMod) * playerWeapon.critMult;
+                    damage = (rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod) * playerWeapon.critMult;
                     Program.ut.TypeLine("You score a critical hit, dealing " + damage + " points of damage to the " + target.name);
                 }
                 else
                 {
-                    damage = rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + playerDamageMod;
+                    damage = rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod;
                     Program.ut.TypeLine("You hit " + target.name+ " for " + damage + " points of damage");
                 }
                 target.TakeDamage(damage);

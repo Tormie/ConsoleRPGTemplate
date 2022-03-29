@@ -87,8 +87,7 @@ namespace ConsoleRPG
             ut.TypeLine("Welcome, player. Please enter your name.");
             string pname = Console.ReadLine();
             player = new Player(pname);
-            player.ChooseClass();
-            player.ChooseWeapon();
+            player.InitPlayer();
         }
 
     }
