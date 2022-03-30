@@ -12,7 +12,6 @@ namespace ConsoleRPG
         public string encounterIntro = "";
         public int encounterLevel;
         public bool isCombatEncounter = false;
-        public List<Enemy> enemyList;
         public List<ModularEnemy> modEnemyList;
         int enemyHP = 0;
         public bool enemiesDefeated = false;
@@ -38,6 +37,21 @@ namespace ConsoleRPG
             resultStrength = eResStr;
         }
 
+        public Encounter Clone()
+        {
+            if (isCombatEncounter == true)
+            {
+                Encounter e = new Encounter(this.encounterName, this.encounterIntro, this.encounterOuttro, this.isCombatEncounter);
+                return e;
+            }
+            else
+            {
+                Encounter e = new Encounter(this.encounterName, this.encounterIntro, this.encounterOuttro, this.result, this.resultStrength);
+                return e;
+            }
+            
+        }
+
         public void Initialize()
         {
             Random encRnd = new Random();
@@ -45,20 +59,6 @@ namespace ConsoleRPG
             if (isCombatEncounter)
             {
                 PopulateEncounter();
-                /*enemyList = new List<Enemy>();
-                Random rnd = new Random();
-                for (int i = 1; i <= encounterLevel/3+1; i++)
-                {
-                    Enemy e = Program.dl.enemyList[rnd.Next(0, Program.dl.enemyList.Count)].Clone();
-                    e.level = Program.player.level;
-                    e.setLevel();
-                    enemyList.Add(e);
-                }
-                foreach (Enemy e in enemyList)
-                {
-                    e.isAlive = true;
-                    e.hp = e.baseHP;
-                }*/
             }
         }
 
@@ -135,64 +135,6 @@ namespace ConsoleRPG
 
             }
         }
-
-
-        public void RunCombatEncounter()
-        {
-            while (enemiesDefeated == false)
-            {
-                Console.WriteLine("Player: " + Program.player.hp + "/" + (Program.player.baseHP + Program.player.characterClass.classHPPerLevel * (Program.player.level-1)));
-                Console.WriteLine("Level: " + Program.player.level);
-                Console.WriteLine("Weapon: " + Program.player.playerWeapon.name + "("+Program.player.playerWeapon.dmgMin+"-"+Program.player.playerWeapon.dmgMax+
-                    "). Damage Modifier: " + Program.player.playerDamageMod);
-                Console.WriteLine("-----------");
-                Console.WriteLine("| Enemies |");
-                Console.WriteLine("-----------");
-                foreach (Enemy e in enemyList)
-                {
-                    if (e.hp > 0)
-                    {
-                        Console.WriteLine(e.name + "("+e.level+") ("+e.wieldedWeapons[0].name+"(" + (e.wieldedWeapons[0].dmgMin + e.dmgMod)+"-"
-                            + (e.wieldedWeapons[0].dmgMax + e.dmgMod)+"("+e.hitChance+"%)): " + e.hp + " /" + e.baseHP);
-                        Console.WriteLine("---------------------");
-                    }
-                }
-                enemyHP = 0;
-                foreach (Enemy e in enemyList)
-                {
-                    enemyHP += e.hp;
-                }
-                if (enemyHP <= 0)
-                {
-                    enemiesDefeated = true;
-                }
-                if (enemiesDefeated == true)
-                {
-                    break;
-                }
-                Program.player.PlayerAction();
-                enemyHP = 0;
-                foreach (Enemy e in enemyList)
-                {
-                    enemyHP += e.hp;
-                }
-                if (enemyHP <= 0)
-                {
-                    enemiesDefeated = true;
-                }
-                if (enemiesDefeated == true)
-                {
-                    break;
-                }
-                else
-                {
-                    Random rnd2 = new Random();
-                    enemyList[rnd2.Next(0, enemyList.Count)].EnemyAction();
-                }
-
-            }
-        }
-
 
         public void Run()
         {

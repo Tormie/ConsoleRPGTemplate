@@ -25,7 +25,7 @@ namespace ConsoleRPG
         static void PlayGame()
         {
             InitiatePlayer();
-            gameEncounters = new List<Encounter>(dl.encounterList);
+            InitiateEncounters();
             while (!gameOver)
             {
                 currentEncounter = gameEncounters[0];
@@ -88,6 +88,18 @@ namespace ConsoleRPG
             string pname = Console.ReadLine();
             player = new Player(pname);
             player.InitPlayer();
+        }
+
+        static void InitiateEncounters()
+        {
+            gameEncounters = new List<Encounter>();
+            for (int i = 0; i < 10; i++)
+            {
+                gameEncounters.Add(dl.encounterList[0].Clone());
+                gameEncounters.Add(dl.encounterList[1].Clone());
+                gameEncounters.Add(dl.encounterList[2].Clone());
+                gameEncounters.Add(dl.encounterList[3].Clone());
+            }
         }
 
     }

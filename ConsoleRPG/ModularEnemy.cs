@@ -25,7 +25,6 @@ namespace ConsoleRPG
             hpMod = hpMod / 2;
             hitChance = Math.Clamp((baseHitChance + hitChancePerLevel * (level - 1) + toHitMod), 0, 100);
             InitWeapon();
-            SetXP();
         }
 
         public void InitModularEnemy()
@@ -60,6 +59,7 @@ namespace ConsoleRPG
             hp = baseHP;
             dmgMod = dmgMod + dmgModPerLevel * (level - 1);
             hitChance = Math.Clamp((baseHitChance + hitChancePerLevel * (level - 1) + toHitMod),0,100);
+            SetXP();
         }
 
         void InitWeapon()

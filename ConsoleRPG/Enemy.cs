@@ -61,7 +61,7 @@ namespace ConsoleRPG
         {
             Program.ut.TypeLine(name + " cries out in agony as it dies");
             Program.player.gainXP(250 * level);
-            Program.currentEncounter.enemyList.Remove(this);
+            //Program.currentEncounter.enemyList.Remove(this);
             Program.monstersDefeated++;
             isAlive = false;
         }
