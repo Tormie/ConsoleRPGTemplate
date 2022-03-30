@@ -13,6 +13,8 @@ namespace ConsoleRPG
         public int baseHitChance = 50;
         public int hitChance = 50;
         public int enemyHPmod = -50;
+        public int xpMod = 0;
+        public int xpValue = 200;
 
         public ModularEnemy()
         {
@@ -23,6 +25,7 @@ namespace ConsoleRPG
             hpMod = hpMod / 2;
             hitChance = Math.Clamp((baseHitChance + hitChancePerLevel * (level - 1) + toHitMod), 0, 100);
             InitWeapon();
+            SetXP();
         }
 
         public void InitModularEnemy()
@@ -32,6 +35,23 @@ namespace ConsoleRPG
             rnd = new Random();
             characterRace = Program.dl.raceList[rnd.Next(0, Program.dl.raceList.Count)];
             name = characterRace.raceName + " " + characterClass.className;
+        }
+
+        void SetXP()
+        {
+            if (hp > 50)
+            {
+                xpMod += 10;
+            }
+            if (dmgMod > 3)
+            {
+                xpMod += 10;
+            }
+            if (hitChance > 60)
+            {
+                xpMod += 10;
+            }
+            xpValue = xpValue + xpMod + (50 * level);
         }
 
         public void setLevel()
@@ -51,7 +71,7 @@ namespace ConsoleRPG
         public override void Die()
         {
             Program.ut.TypeLine(name + " cries out in agony as it dies");
-            Program.player.gainXP(250 * level);
+            Program.player.gainXP(xpValue);
             Program.currentEncounter.modEnemyList.Remove(this);
             Program.monstersDefeated++;
             isAlive = false;

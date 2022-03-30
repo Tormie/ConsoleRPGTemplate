@@ -32,7 +32,8 @@ namespace ConsoleRPG
         {
             Console.Clear();
             level++;
-            hp = characterClass.classBaseHP + hpMod * (level - 1);
+            baseHP = characterClass.classBaseHP + hpMod * level;
+            hp = baseHP;
             Random msg = new Random();
             Program.ut.TypeLine(Program.dl.levelUpMessages[msg.Next(0, Program.dl.levelUpMessages.Count)]);
             Program.ut.TypeLine("You have reached level " + level + ". Your HP has increased to " + hp + ".");
