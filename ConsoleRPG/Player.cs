@@ -11,7 +11,6 @@ namespace ConsoleRPG
     public class Player : Character
     {
         public Weapon playerWeapon = null;
-        public PlayerClass playerClass = null;
         public int playerDamageMod = 1;
         public int playerXP = 0;
 
@@ -52,15 +51,17 @@ namespace ConsoleRPG
             System.Threading.Thread.Sleep(250);
             Console.Clear();
             Console.WriteLine(name + "! Please choose your race.");
+            List<string> choices = new List<string>();
             foreach (Race p in Program.dl.raceList)
             {
+                choices.Add(p.raceName);
                 Console.WriteLine("Name " + p.raceName);
                 Console.Write("Str: " + p.raceStrMod + " Agi: " + p.raceAgiMod + "\n");
                 Console.Write("Con: " + p.raceConMod + " Int: " + p.raceIntMod + "\n");
                 Console.WriteLine("---------------------");
             }
-            Program.ut.TypeLine("Please enter the name of the race you choose to be:");
-            string playerChoice = Console.ReadLine().ToLower();
+            string playerChoice = Program.ut.GetResponse("Please enter the name of the race you choose to be:", choices.ToArray()).ToLower();
+            Console.WriteLine(playerChoice);
             foreach (Race p in Program.dl.raceList)
             {
                 if (p.raceName.ToLower() == playerChoice)
@@ -77,8 +78,10 @@ namespace ConsoleRPG
             System.Threading.Thread.Sleep(250);
             Console.Clear();
             Console.WriteLine(name + "! Please choose your class.");
-            foreach (Class p in Program.dl.classList.Value)
+            List<string> choices = new List<string>();
+            foreach (Class p in Program.dl.classList)
             {
+                choices.Add(p.className);
                 Console.WriteLine("Name " + p.className);
                 Console.WriteLine("HP " + p.classBaseHP);
                 Console.Write("Str: " + p.classStrMod + " Agi: " + p.classAgiMod + "\n");
@@ -91,9 +94,8 @@ namespace ConsoleRPG
                 Console.WriteLine();
                 Console.WriteLine("---------------------");
             }
-            Program.ut.TypeLine("Please enter the name of the class you choose to be:");
-            string playerChoice = Console.ReadLine().ToLower();
-            foreach (Class p in Program.dl.classList.Value)
+            string playerChoice = Program.ut.GetResponse("Please enter the name of the class you choose to be:", choices.ToArray()).ToLower();
+            foreach (Class p in Program.dl.classList)
             {
                 if (p.className.ToLower() == playerChoice)
                 {
@@ -111,13 +113,14 @@ namespace ConsoleRPG
             System.Threading.Thread.Sleep(250);
             Console.Clear();
             Console.WriteLine("Mighty "+characterClass.className + " "+ name + "! Please select your weapon of choice.");
-            foreach(Weapon w in Program.dl.playerWeaponList)
+            List<string> choices = new List<string>();
+            foreach (Weapon w in Program.dl.playerWeaponList)
             {
+                choices.Add(w.name);
                 Console.WriteLine(w.name + " doing " + w.dmgMin + " to " + w.dmgMax + " damage. Crit Chance: "+w.critChance+" for "+w.critMult+" times damage.");
                 Console.WriteLine("---------------------");
             }
-            Program.ut.TypeLine("Please enter the name of your weapon of choice:");
-            string playerChoice = Console.ReadLine().ToLower();
+            string playerChoice = Program.ut.GetResponse("Please enter the name of your weapon of choice:", choices.ToArray()).ToLower();
             foreach (Weapon w in Program.dl.playerWeaponList)
             {
                 if (w.name.ToLower() == playerChoice)
@@ -130,7 +133,93 @@ namespace ConsoleRPG
             Console.Clear();
         }
 
-        public void PlayerAttack()
+        public void PlayerAction()
+        {
+            Console.WriteLine("What do you do?");
+            Console.WriteLine("(A)ttack with your weapon, use a (S)kill, view (C)haracter sheet or view (E)nemy character sheet.");
+            string playerInput = Console.ReadLine();
+            if (playerInput.ToLower() == "c")
+            {
+                Console.Clear();
+                Program.ut.PrintCharacterSheet(Program.player);
+                Program.ut.EnterToCont();
+                Console.Clear();
+                PlayerAction();
+            }
+            if (playerInput.ToLower() == "e")
+            {
+                if (Program.currentEncounter.enemyList.Count == 1)
+                {
+                    Program.ut.PrintCharacterSheet(Program.currentEncounter.enemyList[0]);
+                    Program.ut.EnterToCont();
+                    Console.Clear();
+                    PlayerAction();
+                }
+            }
+
+            if (playerInput.ToLower() == "s")
+            {
+                PlayerUseSkill();
+            }
+            if (playerInput.ToLower() == "a")
+            {
+                TempPlayerAttack();
+            }
+        }
+
+        public void PlayerUseSkill()
+        {
+            Enemy target = null;
+            string playerInput;
+            Console.WriteLine("Which skill do you want to use?(Type Back to return)");
+        }
+
+        public void TempPlayerAttack()
+        {
+            string playerInput;
+            Enemy target = null;
+            bool bCrit = false;
+            Random crit = new Random();
+            if (crit.Next(1, 101) <= playerWeapon.critChance)
+            {
+                bCrit = true;
+            }
+            if (Program.currentEncounter.enemyList.Count > 1)
+            {
+                Console.WriteLine("On which enemy?(Choose the number)");
+                foreach (Enemy e in Program.currentEncounter.enemyList)
+                {
+                    if (e.hp > 0)
+                    {
+                        Console.WriteLine(Program.currentEncounter.enemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.wieldedWeapons[0].name + ")");
+                    }
+                }
+                playerInput = Console.ReadLine();
+                int iTarget = Int32.Parse(playerInput);
+                target = Program.currentEncounter.enemyList[iTarget];
+            }
+            else
+            {
+                target = Program.currentEncounter.enemyList[0];
+            }
+            Console.Clear();
+            Program.ut.TypeLine("You attack " + target.name + " with your " + playerWeapon.name);
+            Random rnd = new Random();
+            int damage;
+            if (bCrit == true)
+            {
+                damage = (rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod) * playerWeapon.critMult;
+                Program.ut.TypeLine("You score a critical hit, dealing " + damage + " points of damage to the " + target.name);
+            }
+            else
+            {
+                damage = rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod;
+                Program.ut.TypeLine("You hit " + target.name + " for " + damage + " points of damage");
+            }
+            target.TakeDamage(damage);
+        }
+
+        /*public void PlayerAttack()
         {
             Console.WriteLine("What do you do?");
             Console.WriteLine("(A)ttack with your weapon, use a (S)kill or view (C)haracter sheet.");
@@ -190,7 +279,7 @@ namespace ConsoleRPG
                 }
                 target.TakeDamage(damage);
             }
-        }
+        }*/
 
         public override void Die()
         {

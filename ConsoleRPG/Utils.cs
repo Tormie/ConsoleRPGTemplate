@@ -17,6 +17,16 @@ namespace ConsoleRPG
             Console.Write("\n");
         }
 
+        public void TypeLine(string line, int delay)
+        {
+            for (int i = 0; i < line.Length; i++)
+            {
+                Console.Write(line[i]);
+                System.Threading.Thread.Sleep(delay);
+            }
+            Console.Write("\n");
+        }
+
         public void EnterToCont()
         {
             Console.WriteLine("Press enter to continue");
@@ -71,12 +81,13 @@ namespace ConsoleRPG
             Console.WriteLine("Hit Points:   " + target.hp + "/" + target.baseHP);
             PrintHorizontalLine();
             Console.WriteLine("Strength:     " + target.strength + "   Melee Damage modifier: " + target.meleeDmgMod);
-            Console.WriteLine("Agility:      " + target.agility + "   To Hit modifier: " + target.toHitMod);
-            Console.WriteLine("                      Dodge modifier: " + target.dodgeMod);
-            Console.WriteLine("Constitution: " + target.constitution + "   Hit Points Modifier: " + target.hpMod);
+            Console.WriteLine("Agility:      " + target.agility + "   To Hit modifier: " + target.toHitMod + "    To Hit chance: "+target.hitChance+"%");
+            Console.WriteLine("                  Dodge modifier: " + target.dodgeMod);
+            Console.WriteLine("Constitution: " + target.constitution + "   Hit Points Per Level: " + target.hpMod);
             Console.WriteLine("Intelligence: " + target.intelligence + "   Magic Damage modifier: " + target.magicDmgMod);
             PrintHorizontalLine();
-            Console.WriteLine("Weapon:       " + target.wieldedWeapon.name + "   Damage: " + target.wieldedWeapon.dmgMin + "-" + target.wieldedWeapon.dmgMax);
+            Console.WriteLine("Weapon:       " + target.wieldedWeapon.name + "   Damage: " + (target.wieldedWeapon.dmgMin) + "-"
+                            + (target.wieldedWeapon.dmgMax) + " (" + target.wieldedWeapon.critChance + "%) for x"+target.wieldedWeapon.critMult+" damage");
         }
 
         public void PrintHorizontalLine()
@@ -86,6 +97,23 @@ namespace ConsoleRPG
             {
                 Console.Write("-");
             }
+        }
+
+        public string GetResponse(string question, string[] options)
+        {
+            TypeLine(question);
+            string response = Console.ReadLine();
+            
+            foreach (string s in options)
+            {
+                if (response.ToLower() == s.ToLower() )
+                {
+                    return response;
+                }
+            }
+            Console.WriteLine("Incorrect choice, please try again.");
+            
+            return GetResponse(question, options);
         }
     }
 }

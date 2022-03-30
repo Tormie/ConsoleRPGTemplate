@@ -19,14 +19,7 @@ namespace ConsoleRPG
         public static int monstersDefeated = 0;
         static void Main(string[] args)
         {
-            ModularEnemy e = new ModularEnemy();
-            ut.PrintCharacterSheet(e);
-            ModularEnemy f = new ModularEnemy();
-            ut.PrintCharacterSheet(f);
-            ModularEnemy g = new ModularEnemy();
-            ut.PrintCharacterSheet(g);
-            Console.ReadLine();
-            //PlayGame();
+            PlayGame();
         }
 
         static void PlayGame()

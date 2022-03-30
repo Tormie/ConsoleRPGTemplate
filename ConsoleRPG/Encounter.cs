@@ -114,7 +114,7 @@ namespace ConsoleRPG
                 {
                     break;
                 }
-                Program.player.PlayerAttack();
+                Program.player.PlayerAction();
                 enemyHP = 0;
                 foreach (Enemy e in enemyList)
                 {
