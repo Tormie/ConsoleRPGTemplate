@@ -140,21 +140,11 @@ namespace ConsoleRPG
             string playerInput = Console.ReadLine();
             if (playerInput.ToLower() == "c")
             {
-                Console.Clear();
-                Program.ut.PrintCharacterSheet(Program.player);
-                Program.ut.EnterToCont();
-                Console.Clear();
-                PlayerAction();
+                ViewPlayerCharacterSheet();
             }
             if (playerInput.ToLower() == "e")
             {
-                if (Program.currentEncounter.enemyList.Count == 1)
-                {
-                    Program.ut.PrintCharacterSheet(Program.currentEncounter.enemyList[0]);
-                    Program.ut.EnterToCont();
-                    Console.Clear();
-                    PlayerAction();
-                }
+                ViewEnemyCharacterSheet();
             }
 
             if (playerInput.ToLower() == "s")
@@ -163,7 +153,7 @@ namespace ConsoleRPG
             }
             if (playerInput.ToLower() == "a")
             {
-                TempPlayerAttack();
+                PlayerAttack();
             }
         }
 
@@ -174,33 +164,33 @@ namespace ConsoleRPG
             Console.WriteLine("Which skill do you want to use?(Type Back to return)");
         }
 
-        public void TempPlayerAttack()
+        public void PlayerAttack()
         {
             string playerInput;
-            Enemy target = null;
+            ModularEnemy target = null;
             bool bCrit = false;
             Random crit = new Random();
             if (crit.Next(1, 101) <= playerWeapon.critChance)
             {
                 bCrit = true;
             }
-            if (Program.currentEncounter.enemyList.Count > 1)
+            if (Program.currentEncounter.modEnemyList.Count > 1)
             {
                 Console.WriteLine("On which enemy?(Choose the number)");
-                foreach (Enemy e in Program.currentEncounter.enemyList)
+                foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
                 {
                     if (e.hp > 0)
                     {
-                        Console.WriteLine(Program.currentEncounter.enemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.wieldedWeapons[0].name + ")");
+                        Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.wieldedWeapon.name + ")");
                     }
                 }
                 playerInput = Console.ReadLine();
                 int iTarget = Int32.Parse(playerInput);
-                target = Program.currentEncounter.enemyList[iTarget];
+                target = Program.currentEncounter.modEnemyList[iTarget];
             }
             else
             {
-                target = Program.currentEncounter.enemyList[0];
+                target = Program.currentEncounter.modEnemyList[0];
             }
             Console.Clear();
             Program.ut.TypeLine("You attack " + target.name + " with your " + playerWeapon.name);
@@ -219,67 +209,45 @@ namespace ConsoleRPG
             target.TakeDamage(damage);
         }
 
-        /*public void PlayerAttack()
+        public void ViewPlayerCharacterSheet()
         {
-            Console.WriteLine("What do you do?");
-            Console.WriteLine("(A)ttack with your weapon, use a (S)kill or view (C)haracter sheet.");
-            Enemy target = null;
-            string playerInput = Console.ReadLine();
-            if (playerInput.ToLower() == "c")
+            Console.Clear();
+            Program.ut.PrintCharacterSheet(Program.player);
+            Program.ut.EnterToCont();
+            Console.Clear();
+            PlayerAction();
+        }
+
+        public void ViewEnemyCharacterSheet()
+        {
+            string playerInput;
+            ModularEnemy target;
+            if (Program.currentEncounter.modEnemyList.Count == 1)
             {
-                Console.Clear();
-                Program.ut.PrintCharacterSheet(Program.player);
+                Program.ut.PrintCharacterSheet(Program.currentEncounter.modEnemyList[0]);
                 Program.ut.EnterToCont();
                 Console.Clear();
-                PlayerAttack();
+                PlayerAction();
             }
-
-            if (playerInput.ToLower() == "s")
+            else
             {
-                Console.WriteLine("Which skill do you want to use?(Type Back to return)");
-            }
-            if (playerInput.ToLower() == "a")
-            {
-                bool bCrit = false;
-                Random crit = new Random();
-                if (crit.Next(1,101) <= playerWeapon.critChance)
+                Console.WriteLine("Character sheet for which enemy?(Choose the number)");
+                foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
                 {
-                    bCrit = true;
-                }
-                if (Program.currentEncounter.enemyList.Count > 1)
-                {
-                    Console.WriteLine("On which enemy?(Choose the number)");
-                    foreach (Enemy e in Program.currentEncounter.enemyList)
+                    if (e.hp > 0)
                     {
-                        if (e.hp > 0)
-                        {
-                            Console.WriteLine(Program.currentEncounter.enemyList.IndexOf(e) + " " + e.name + "("+e.level+") ("+e.wieldedWeapons[0].name+")");
-                        }
+                        Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.wieldedWeapon.name + ")");
                     }
-                    playerInput = Console.ReadLine();
-                    int iTarget = Int32.Parse(playerInput);
-                    target = Program.currentEncounter.enemyList[iTarget];
-                } else
-                {
-                    target = Program.currentEncounter.enemyList[0];
                 }
+                playerInput = Console.ReadLine();
+                int iTarget = Int32.Parse(playerInput);
+                target = Program.currentEncounter.modEnemyList[iTarget];
+                Program.ut.PrintCharacterSheet(target);
+                Program.ut.EnterToCont();
                 Console.Clear();
-                Program.ut.TypeLine("You attack " + target.name + " with your " + playerWeapon.name);
-                Random rnd = new Random();
-                int damage;
-                if (bCrit == true)
-                {
-                    damage = (rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod) * playerWeapon.critMult;
-                    Program.ut.TypeLine("You score a critical hit, dealing " + damage + " points of damage to the " + target.name);
-                }
-                else
-                {
-                    damage = rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod;
-                    Program.ut.TypeLine("You hit " + target.name+ " for " + damage + " points of damage");
-                }
-                target.TakeDamage(damage);
+                PlayerAction();
             }
-        }*/
+        }
 
         public override void Die()
         {

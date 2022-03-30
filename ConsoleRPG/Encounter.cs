@@ -44,8 +44,8 @@ namespace ConsoleRPG
             encounterLevel = Program.player.level + encRnd.Next(0, 3) - 1;
             if (isCombatEncounter)
             {
-                //PopulateEncounter();
-                enemyList = new List<Enemy>();
+                PopulateEncounter();
+                /*enemyList = new List<Enemy>();
                 Random rnd = new Random();
                 for (int i = 1; i <= encounterLevel/3+1; i++)
                 {
@@ -58,7 +58,7 @@ namespace ConsoleRPG
                 {
                     e.isAlive = true;
                     e.hp = e.baseHP;
-                }
+                }*/
             }
         }
 
@@ -69,17 +69,73 @@ namespace ConsoleRPG
             for (int i = 1; i <= encounterLevel / 3 + 1; i++)
             {
                 ModularEnemy m = new ModularEnemy();
-                Enemy e = Program.dl.enemyList[rnd.Next(0, Program.dl.enemyList.Count)].Clone();
-                e.level = Program.player.level;
-                e.setLevel();
-                enemyList.Add(e);
+                m.level = Program.player.level;
+                m.setLevel();
+                modEnemyList.Add(m);
             }
-            foreach (Enemy e in enemyList)
+            foreach (ModularEnemy m in modEnemyList)
             {
-                e.isAlive = true;
-                e.hp = e.baseHP;
+                m.isAlive = true;
+                m.hp = m.baseHP;
             }
         }
+
+        public void RunModularCombatEncounter()
+        {
+            while (enemiesDefeated == false)
+            {
+                Console.WriteLine("Player: " + Program.player.hp + "/" + (Program.player.baseHP + Program.player.characterClass.classHPPerLevel * (Program.player.level - 1)));
+                Console.WriteLine("Level: " + Program.player.level);
+                Console.WriteLine("Weapon: " + Program.player.playerWeapon.name + "(" + Program.player.playerWeapon.dmgMin + "-" + Program.player.playerWeapon.dmgMax +
+                    "). Damage Modifier: " + Program.player.playerDamageMod);
+                Console.WriteLine("-----------");
+                Console.WriteLine("| Enemies |");
+                Console.WriteLine("-----------");
+                foreach (ModularEnemy e in modEnemyList)
+                {
+                    if (e.hp > 0)
+                    {
+                        Console.WriteLine(e.name + "(" + e.level + ") (" + e.wieldedWeapon.name + "(" + (e.wieldedWeapon.dmgMin + e.dmgMod) + "-"
+                            + (e.wieldedWeapon.dmgMax + e.dmgMod) + "(" + e.hitChance + "%)): " + e.hp + " /" + e.baseHP);
+                        Console.WriteLine("---------------------");
+                    }
+                }
+                enemyHP = 0;
+                foreach (ModularEnemy e in modEnemyList)
+                {
+                    enemyHP += e.hp;
+                }
+                if (enemyHP <= 0)
+                {
+                    enemiesDefeated = true;
+                }
+                if (enemiesDefeated == true)
+                {
+                    break;
+                }
+                Program.player.PlayerAction();
+                enemyHP = 0;
+                foreach (ModularEnemy e in modEnemyList)
+                {
+                    enemyHP += e.hp;
+                }
+                if (enemyHP <= 0)
+                {
+                    enemiesDefeated = true;
+                }
+                if (enemiesDefeated == true)
+                {
+                    break;
+                }
+                else
+                {
+                    Random rnd2 = new Random();
+                    modEnemyList[rnd2.Next(0, modEnemyList.Count)].EnemyAction();
+                }
+
+            }
+        }
+
 
         public void RunCombatEncounter()
         {
@@ -144,7 +200,7 @@ namespace ConsoleRPG
             Program.ut.TypeLine(encounterIntro);
             if (isCombatEncounter == true)
             {
-                RunCombatEncounter();
+                RunModularCombatEncounter();
                 Program.ut.TypeLine(encounterOuttro);
             }
             else

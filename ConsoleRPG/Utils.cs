@@ -54,6 +54,12 @@ namespace ConsoleRPG
             Console.WriteLine("Intelligence: " + target.intelligence + "   Magic Damage modifier: " + target.magicDmgMod);
             PrintHorizontalLine();
             Console.WriteLine("Weapon:       " + target.playerWeapon.name + "   Damage: " + target.playerWeapon.dmgMin + "-" + target.playerWeapon.dmgMax);
+            PrintHorizontalLine();
+            Console.WriteLine("Skills");
+            foreach(Skill s in target.characterClass.skillList)
+            {
+                Console.WriteLine(s.skillName + " , " + s.damageType);
+            }
         }
 
         public void PrintCharacterSheet(Enemy target)
