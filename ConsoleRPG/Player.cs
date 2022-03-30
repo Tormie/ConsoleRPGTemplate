@@ -61,7 +61,6 @@ namespace ConsoleRPG
                 Console.WriteLine("---------------------");
             }
             string playerChoice = Program.ut.GetResponse("Please enter the name of the race you choose to be:", choices.ToArray()).ToLower();
-            Console.WriteLine(playerChoice);
             foreach (Race p in Program.dl.raceList)
             {
                 if (p.raceName.ToLower() == playerChoice)

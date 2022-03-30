@@ -88,7 +88,8 @@ namespace ConsoleRPG
         }
         void EnemyUseSkill()
         {
-
+            Program.ut.TypeLine("The " + name + " tries to use " + characterClass.skillList[0].skillName);
+            Program.ut.TypeLine("It fails horribly, leaving it wide open to attack.");
         }
 
     }

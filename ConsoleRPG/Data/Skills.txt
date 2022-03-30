@@ -1,10 +1,10 @@
 / You can add skills to this file (Name, description, skill use flavor text, cooldown, damage multiplier, class, targets all, targets self, damage type) Don't remove this line
 / You can use the / symbol to add commentary to this file.
-Bash,Bash: Bash an enemy with terrible force - doing base * 5 damage. 2 turn cooldown.,Using all your strength - you barrel into the , 2, 5, 1, false, false, standard
-Block,Block: Block incoming damage using a shield. No cooldown.,You expertly use your shield to block the attack(s), 0, 0, 1, false, true, block
-Fire bolt,Fire bolt: calling up the arcane forces - you blast the enemy with a scorching firebolt - doing base * 4 damage. 1 turn cooldown.,You throw a mighty firebolt at the , 1, 4, 2, false, false, fire
-Frost Nova,Frost Nova: Freeze the enemy characters for 1 - 4 turns. 4 turn cooldown.,You channel your inner chill to conjure up an expanding ring of ice. This freezes the enemies for several turns., 4, 4, 2, true, false, freeze
-Sneak Attack,Sneak Attack: Hide in the shadows to deliver a deadly attack upon an unsuspecting enemy. Doing base * 5 damage. 3 turn cool down.,Hiding in the shadows - you strike out at, 3,5,3,false,false, standard
-Hide in Shadows,Hide in Shadows: Hiding in the shadows you become undetectable and enemies can not attack you this turn.,With a swift whirl you disappear into the shadows.,0,0,3,false,false, block
-Cleave,Cleave: Using all your strength - you cleave through all enemies - doing base damage. 3 turn cool down.,With a mighty sweep you cleave through all enemies.,3,1,4,true,false, standard
-Heal,Heal: Heals yourself for base * 5 hp. 3 turn cool down.,Channeling the positive energies - healing power flows through your body.,3,5,4,false,true, healing
+Bash,Bash: Bash an enemy with terrible force - doing base * 5 damage. 2 turn cooldown.,Using all your strength - you barrel into the , 2, 5, 1, false, false,standard
+Block,Block: Block incoming damage using a shield. No cooldown.,You expertly use your shield to block the attack(s), 0, 0, 1, false, true,block
+Fire bolt,Fire bolt: calling up the arcane forces - you blast the enemy with a scorching firebolt - doing base * 4 damage. 1 turn cooldown.,You throw a mighty firebolt at the , 1, 4, 2, false, false,fire
+Frost Nova,Frost Nova: Freeze the enemy characters for 1 - 4 turns. 4 turn cooldown.,You channel your inner chill to conjure up an expanding ring of ice. This freezes the enemies for several turns., 4, 4, 2, true, false,stun
+Sneak Attack,Sneak Attack: Hide in the shadows to deliver a deadly attack upon an unsuspecting enemy. Doing base * 5 damage. 3 turn cool down.,Hiding in the shadows - you strike out at, 3,5,3,false,false,standard
+Hide in Shadows,Hide in Shadows: Hiding in the shadows you become undetectable and enemies can not attack you this turn.,With a swift whirl you disappear into the shadows.,0,0,3,false,false,block
+Cleave,Cleave: Using all your strength - you cleave through all enemies - doing base damage. 3 turn cool down.,With a mighty sweep you cleave through all enemies.,3,1,4,true,false,standard
+Heal,Heal: Heals yourself for base * 5 hp. 3 turn cool down.,Channeling the positive energies - healing power flows through your body.,3,5,4,false,true,healing

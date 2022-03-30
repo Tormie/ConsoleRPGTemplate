@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-/*  Utils class - houses some utilitary functions */
+/*  Utils class - houses some utilitary functions
+ *  Apparently this class turned into housing game related functions too */
 
 namespace ConsoleRPG
 {
@@ -55,11 +56,13 @@ namespace ConsoleRPG
             PrintHorizontalLine();
             Console.WriteLine("Weapon:       " + target.playerWeapon.name + "   Damage: " + target.playerWeapon.dmgMin + "-" + target.playerWeapon.dmgMax);
             PrintHorizontalLine();
-            Console.WriteLine("Skills");
+            Console.WriteLine("Skills(damage type)");
+            Console.WriteLine();
             foreach(Skill s in target.characterClass.skillList)
             {
-                Console.WriteLine(s.skillName + " , " + s.damageType);
+                Console.WriteLine(s.skillName + "(" + s.damageType+")");
             }
+            Console.WriteLine();
         }
 
         public void PrintCharacterSheet(Enemy target)
@@ -94,6 +97,14 @@ namespace ConsoleRPG
             PrintHorizontalLine();
             Console.WriteLine("Weapon:       " + target.wieldedWeapon.name + "   Damage: " + (target.wieldedWeapon.dmgMin) + "-"
                             + (target.wieldedWeapon.dmgMax) + " (" + target.wieldedWeapon.critChance + "%) for x"+target.wieldedWeapon.critMult+" damage");
+            PrintHorizontalLine();
+            Console.WriteLine("Skills(damage type)");
+            Console.WriteLine();
+            foreach (Skill s in target.characterClass.skillList)
+            {
+                Console.WriteLine(s.skillName + "(" + s.damageType + ")");
+            }
+            Console.WriteLine();
         }
 
         public void PrintHorizontalLine()

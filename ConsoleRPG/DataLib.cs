@@ -175,7 +175,15 @@ namespace ConsoleRPG
                     int classCMod = Int32.Parse(classParts[5]);
                     int classIMod = Int32.Parse(classParts[6]);
                     int classID = Int32.Parse(classParts[7]);
-                    classList.Add(new Class(className, classBHP, classHPL, classSMod, classAMod, classCMod, classIMod, new List<Skill>(skillList.FindAll(Skill => Skill.classID == classID))));
+                    Class c = new Class(className, classBHP, classHPL, classSMod, classAMod, classCMod, classIMod, new List<Skill>());
+                    foreach (Skill k in skillList)
+                    {
+                        if (k.classID == classID)
+                        {
+                            c.skillList.Add(k);
+                        }
+                    }
+                    classList.Add(c);
                 }
             }
         }
