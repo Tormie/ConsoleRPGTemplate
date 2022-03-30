@@ -28,6 +28,13 @@ namespace ConsoleRPG
             damageType = dType;
         }
 
+        public Skill Clone()
+        {
+            Skill s = new Skill(this.skillName,this.skillText,this.skillUseText, this.skillCooldown, this.skillPower, this.classID, this.targetsAll, this.targetsSelf, this.damageType);
+            return s;
+        }
+
+
         public void UseSkill(Character target, Character instigator)
         {
             if (instigator is Player)

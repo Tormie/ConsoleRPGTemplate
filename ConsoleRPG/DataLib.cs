@@ -25,9 +25,7 @@ namespace ConsoleRPG
         {
             ReadLevelUpLines();
             ReadRaces();
-            ReadPlayerSkills();
             ReadSkills();
-            ReadPlayerClasses();
             ReadClasses();
             ReadWeapons();
             ReadEnemies();
@@ -90,28 +88,6 @@ namespace ConsoleRPG
             }
         }
 
-        void ReadPlayerSkills()
-        {
-            Program.ut.TypeLine("Loading skills");
-            string[] skillLines = System.IO.File.ReadAllLines(Path.Combine(dataFolder, "PlayerSkills.txt"));
-            playerSkillList = new List<PlayerSkill>();
-            foreach (string s in skillLines)
-            {
-                if (s[0] != '/')
-                {
-                    string[] skillParts = s.Split(',');
-                    string skillName = skillParts[0];
-                    string skillDesc = skillParts[1];
-                    string skillUse = skillParts[2];
-                    int skillCD = Int32.Parse(skillParts[3]);
-                    int skillDmgMod = Int32.Parse(skillParts[4]);
-                    int skillClass = Int32.Parse(skillParts[5]);
-                    bool skillAll = bool.Parse(skillParts[6]);
-                    playerSkillList.Add(new PlayerSkill(skillName, skillDesc, skillUse, skillCD, skillDmgMod, skillClass, skillAll));
-                }
-            }
-        }
-
         void ReadSkills()
         {
             Program.ut.TypeLine("Loading skills");
@@ -132,27 +108,6 @@ namespace ConsoleRPG
                     bool skillSelf = bool.Parse(skillParts[7]);
                     string sType = skillParts[8];
                     skillList.Add(new Skill(skillName, skillDesc, skillUse, skillCD, skillDmgMod, skillClass, skillAll, skillSelf, sType));
-                }
-            }
-        }
-
-        void ReadPlayerClasses()
-        {
-            Program.ut.TypeLine("Loading classes");
-            string[] classLines = System.IO.File.ReadAllLines(Path.Combine(dataFolder, "PlayerClasses.txt"));
-            playerClassesList = new List<PlayerClass>();
-            foreach (string s in classLines)
-            {
-                if (s[0] != '/')
-                {
-                    string[] classParts = s.Split(',');
-                    string className = classParts[0];
-                    int classBHP = Int32.Parse(classParts[1]);
-                    int classBDM = Int32.Parse(classParts[2]);
-                    int classHPL = Int32.Parse(classParts[3]);
-                    int classDPL = Int32.Parse(classParts[4]);
-                    int classID = Int32.Parse(classParts[5]);
-                    playerClassesList.Add(new PlayerClass(className, classBHP, classBDM, classHPL, classDPL, new List<PlayerSkill>(playerSkillList.FindAll(PlayerSkill => PlayerSkill.playerClassID == classID))));
                 }
             }
         }
@@ -180,7 +135,8 @@ namespace ConsoleRPG
                     {
                         if (k.classID == classID)
                         {
-                            c.skillList.Add(k);
+                            Skill x = k.Clone();
+                            c.skillList.Add(x);
                         }
                     }
                     classList.Add(c);
