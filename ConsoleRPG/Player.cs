@@ -83,6 +83,7 @@ namespace ConsoleRPG
             {
                 choices.Add(p.className);
                 Console.WriteLine("Name " + p.className);
+                Console.WriteLine();
                 Console.WriteLine("HP " + p.classBaseHP);
                 Console.Write("Str: " + p.classStrMod + " Agi: " + p.classAgiMod + "\n");
                 Console.Write("Con: " + p.classConMod + " Int: " + p.classIntMod + "\n");
@@ -136,7 +137,7 @@ namespace ConsoleRPG
         public void PlayerAction()
         {
             Console.WriteLine("What do you do?");
-            Console.WriteLine("(A)ttack with your weapon, use a (S)kill, view (C)haracter sheet or view (E)nemy character sheet.");
+            Console.WriteLine("(A)ttack with your weapon(default action), use a (S)kill, view (C)haracter sheet or view (E)nemy character sheet.");
             string playerInput = Console.ReadLine();
             if (playerInput.ToLower() == "c")
             {
@@ -151,7 +152,7 @@ namespace ConsoleRPG
             {
                 PlayerUseSkill();
             }
-            if (playerInput.ToLower() == "a")
+            if (playerInput.ToLower() == "a" || playerInput == "")
             {
                 PlayerAttack();
             }
