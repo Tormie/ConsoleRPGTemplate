@@ -7,12 +7,12 @@ namespace ConsoleRPG
 {
     public class Character
     {
-        /*  Groundwork for expanded stats system for player and enemies
+        /*  Expanded stats system for player and enemies
          *  Strength manages melee damage
          *  Agility manages to hit and/or dodge
          *  Constitution manages hit points
          *  Intelligence manages magic damage
-         *  For now, we're using values 1-9 with 5 being average for a 0 bonus/malus */
+         *  For now, we're using integer values with 5 being average for a 0 bonus/malus */
         public int strength = 5;
         public int agility = 5;
         public int constitution = 5;
@@ -23,6 +23,15 @@ namespace ConsoleRPG
         public int hpMod;
         public int magicDmgMod;
 
+        /*  Status types for characters. 
+         *  used to implement different skill effects */
+        public bool isInvulnerable = false;
+        public int invulDuration;
+        public string invulType = "";
+        public bool isStunned = false;
+        public int stunDuration;
+
+        /*  Some base stats */
         public Class characterClass;
         public Race characterRace;
 
@@ -32,6 +41,7 @@ namespace ConsoleRPG
         public bool isAlive = true;
         public int level = 1;
 
+        /*  Initialize derivative stats based on base stats. */
         public void SetStats()
         {
             strength += characterClass.classStrMod + characterRace.raceStrMod;
@@ -48,6 +58,7 @@ namespace ConsoleRPG
             hp = baseHP;
         }
 
+        /*  Pretty straightforward if you ask me */
         public void TakeDamage(int damage)
         {
             hp -= damage;
@@ -57,10 +68,40 @@ namespace ConsoleRPG
                 Die();
             }    
         }
-
+        /*  Pretty straightforward if you ask me */
         public virtual void Die()
         {
             isAlive = false;
+        }
+
+        /*  Handles skill and status effect cooldowns */
+        public void TurnManager()
+        {
+            foreach (Skill s in characterClass.skillList)
+            {
+                if (s.coolDownTimer > 0)
+                {
+                    s.coolDownTimer--;
+                }
+            }
+            if (invulDuration > 0)
+            {
+                invulDuration--;
+                if (invulDuration <= 0)
+                {
+                    Console.WriteLine(name + " is no longer invulnerable.");
+                    isInvulnerable = false;
+                }
+            }
+            if (stunDuration > 0)
+            {
+                stunDuration--;
+                if (stunDuration <= 0)
+                {
+                    Console.WriteLine(name + " is no longer stunned.");
+                    isStunned = false;
+                }
+            }
         }
 
     }

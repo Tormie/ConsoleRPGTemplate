@@ -10,10 +10,7 @@ namespace ConsoleRPG
     public class DataLib
     {
         public List<Weapon> playerWeaponList;
-        public List<PlayerClass> playerClassesList;
         public List<Class> classList;
-        public List<Enemy> enemyList;
-        public List<PlayerSkill> playerSkillList;
         public List<Skill> skillList;
         public List<Encounter> encounterList;
         public List<String> levelUpMessages;
@@ -28,7 +25,6 @@ namespace ConsoleRPG
             ReadSkills();
             ReadClasses();
             ReadWeapons();
-            ReadEnemies();
             ReadEncounters();
             Program.ut.TypeLine("Done loading, press enter to continue");
             Console.ReadLine();
@@ -140,26 +136,6 @@ namespace ConsoleRPG
                         }
                     }
                     classList.Add(c);
-                }
-            }
-        }
-
-        void ReadEnemies()
-        {
-            Program.ut.TypeLine("Loading enemies");
-            string[] enemyLines = System.IO.File.ReadAllLines(Path.Combine(dataFolder, "Enemies.txt"));
-            enemyList = new List<Enemy>();
-            foreach (string s in enemyLines)
-            {
-                if (s[0] != '/')
-                {
-                    string[] enemyParts = s.Split(',');
-                    int eHP = Int32.Parse(enemyParts[0]);
-                    string eName = enemyParts[1];
-                    int eHands = Int32.Parse(enemyParts[2]);
-                    int eDmgMod = Int32.Parse(enemyParts[3]);
-                    int eHitChance = Int32.Parse(enemyParts[4]);
-                    enemyList.Add(new Enemy(eHP, eName, eHands, eDmgMod, eHitChance));
                 }
             }
         }

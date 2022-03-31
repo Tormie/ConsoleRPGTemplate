@@ -136,32 +136,48 @@ namespace ConsoleRPG
 
         public void PlayerAction()
         {
-            Console.WriteLine("What do you do?");
-            Console.WriteLine("(A)ttack with your weapon(default action), use a (S)kill, view (C)haracter sheet or view (E)nemy character sheet.");
-            string playerInput = Console.ReadLine();
-            if (playerInput.ToLower() == "c")
+            if (!isStunned)
             {
-                ViewPlayerCharacterSheet();
-            }
-            if (playerInput.ToLower() == "e")
-            {
-                ViewEnemyCharacterSheet();
-            }
+                Console.WriteLine("What do you do?");
+                Console.WriteLine("(A)ttack with your weapon(default action), use a (S)kill, view (C)haracter sheet or view (E)nemy character sheet.");
+                string playerInput = Console.ReadLine();
+                if (playerInput.ToLower() == "c")
+                {
+                    ViewPlayerCharacterSheet();
+                }
+                if (playerInput.ToLower() == "e")
+                {
+                    ViewEnemyCharacterSheet();
+                }
 
-            if (playerInput.ToLower() == "s")
+                if (playerInput.ToLower() == "s")
+                {
+                    PlayerUseSkill();
+                }
+                if (playerInput.ToLower() == "a" || playerInput == "")
+                {
+                    PlayerAttack();
+                }
+            } else
             {
-                PlayerUseSkill();
+                Program.ut.TypeLine("You are stunned and cannot take action this turn. You can choose to view (C)haracter sheet or view (E)nemy character sheet.");
+                Program.ut.TypeLine("Press enter to end your turn.");
+                string playerInput = Console.ReadLine();
+                if (playerInput.ToLower() == "c")
+                {
+                    ViewPlayerCharacterSheet();
+                }
+                if (playerInput.ToLower() == "e")
+                {
+                    ViewEnemyCharacterSheet();
+                }
             }
-            if (playerInput.ToLower() == "a" || playerInput == "")
-            {
-                PlayerAttack();
-            }
+            TurnManager();
         }
 
         public void PlayerUseSkill()
         {
-            Enemy target = null;
-            string playerInput;
+            ModularEnemy target = null;
             Console.WriteLine("Which skill do you want to use?(Type Back to return)");
         }
 
@@ -194,20 +210,34 @@ namespace ConsoleRPG
                 target = Program.currentEncounter.modEnemyList[0];
             }
             Console.Clear();
-            Program.ut.TypeLine("You attack " + target.name + " with your " + playerWeapon.name);
-            Random rnd = new Random();
-            int damage;
-            if (bCrit == true)
+            if (target.isInvulnerable)
             {
-                damage = (rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod) * playerWeapon.critMult;
-                Program.ut.TypeLine("You score a critical hit, dealing " + damage + " points of damage to the " + target.name);
+                if (target.invulType == "block")
+                {
+                    Program.ut.TypeLine("Your attack bounces off harmlessly. You deal no damage to the enemy.");
+                }
+                if (target.invulType == "stealth")
+                {
+                    Program.ut.TypeLine("You cannot seem to locate the enemy. You spend your turn looking for it.");
+                }
             }
             else
             {
-                damage = rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod;
-                Program.ut.TypeLine("You hit " + target.name + " for " + damage + " points of damage");
+                Program.ut.TypeLine("You attack " + target.name + " with your " + playerWeapon.name);
+                Random rnd = new Random();
+                int damage;
+                if (bCrit == true)
+                {
+                    damage = (rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod) * playerWeapon.critMult;
+                    Program.ut.TypeLine("You score a critical hit, dealing " + damage + " points of damage to the " + target.name);
+                }
+                else
+                {
+                    damage = rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod;
+                    Program.ut.TypeLine("You hit " + target.name + " for " + damage + " points of damage");
+                }
+                target.TakeDamage(damage);
             }
-            target.TakeDamage(damage);
         }
 
         public void ViewPlayerCharacterSheet()

@@ -39,21 +39,21 @@ namespace ConsoleRPG
         {
             if (instigator is Player)
             {
-                if (coolDownTimer >= skillCooldown)
+                if (coolDownTimer <= 0)
                 {
                     int damage = skillPower * Program.player.playerDamageMod;
                     Program.ut.TypeLine(skillUseText + target.name + ". Doing " + damage + " to it.");
                     target.TakeDamage(damage);
-                    coolDownTimer = 0;
+                    coolDownTimer = skillCooldown;
                 }
                 else
                 {
-                    Program.ut.TypeLine("Cooldown for " + skillName + " has not yet run out. Please wait " + (skillCooldown - coolDownTimer) + " more turns.");
+                    Program.ut.TypeLine("Cooldown for " + skillName + " has not yet run out. Please wait " + coolDownTimer + " more turns.");
                     Player p = (Player)instigator;
                     p.PlayerAction();
                 }
             }
-            else if (instigator is Enemy)
+            else if (instigator is ModularEnemy)
             {
 
             }

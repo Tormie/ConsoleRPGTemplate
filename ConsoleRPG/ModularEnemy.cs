@@ -57,7 +57,7 @@ namespace ConsoleRPG
         {
             baseHP = hp + hpMod * (level - 1);
             hp = baseHP;
-            dmgMod = dmgMod + dmgModPerLevel * (level - 1);
+            dmgMod = meleeDmgMod + dmgModPerLevel * (level - 1);
             hitChance = Math.Clamp((baseHitChance + hitChancePerLevel * (level - 1) + toHitMod),0,100);
             SetXP();
         }
@@ -74,41 +74,65 @@ namespace ConsoleRPG
             Program.player.gainXP(xpValue);
             Program.currentEncounter.modEnemyList.Remove(this);
             Program.monstersDefeated++;
+            Console.WriteLine("You gain " + xpValue + " experience points.");
             isAlive = false;
         }
 
         public void EnemyAction()
         {
-            Random useSkill = new Random();
-            if (useSkill.Next(0,101) > 25)
+            if (!isStunned)
             {
-                EnemyAttack();
-            }
-            else
+                Random useSkill = new Random();
+                if (useSkill.Next(0, 101) > 25)
+                {
+                    EnemyAttack();
+                }
+                else
+                {
+                    EnemyUseSkill();
+                }
+            } else
             {
-                EnemyUseSkill();
+                Console.WriteLine(name + " is stunned and cannot take action this turn.");
             }
-            
+            TurnManager();
         }
         void EnemyAttack()
         {
-            Random hitPct = new Random();
-            Program.ut.TypeLine("The " + name + "(" + level + ") takes a swing at you with its " + wieldedWeapon.name + "!");
-            if (hitPct.Next(0, 101) <= Math.Clamp(hitChance + (hitChancePerLevel * (level - 1)), 0, 100))
+            if (Program.player.isInvulnerable)
             {
-                Random wpDamage = new Random();
-                int dmg = wpDamage.Next(wieldedWeapon.dmgMin, wieldedWeapon.dmgMax + 1) + dmgMod;
-                Program.ut.TypeLine("It hits you for " + dmg + " damage!");
-                Program.player.TakeDamage(dmg);
+                if (Program.player.invulType == "block")
+                {
+                    Program.ut.TypeLine("The enemy attack bounces off harmlessly. You take no damage.");
+                }
+                if (Program.player.invulType == "stealth")
+                {
+                    Program.ut.TypeLine("The enemy cannot seem to locate you, it spends its turn looking for you.");
+                }
             }
             else
             {
-                Program.ut.TypeLine("It misses, leaving it wide open for you to retaliate!");
+                Random hitPct = new Random();
+                Program.ut.TypeLine("The " + name + "(" + level + ") takes a swing at you with its " + wieldedWeapon.name + "!");
+                if (hitPct.Next(0, 101) <= Math.Clamp(hitChance + (hitChancePerLevel * (level - 1)), 0, 100))
+                {
+                    Random wpDamage = new Random();
+
+                    int dmg = wpDamage.Next(wieldedWeapon.dmgMin, wieldedWeapon.dmgMax + 1) + dmgMod;
+                    Program.ut.TypeLine("It hits you for " + dmg + " damage!");
+                    Program.player.TakeDamage(dmg);
+                }
+                else
+                {
+                    Program.ut.TypeLine("It misses, leaving it wide open for you to retaliate!");
+                }
             }
         }
         void EnemyUseSkill()
         {
-            Program.ut.TypeLine("The " + name + " tries to use " + characterClass.skillList[0].skillName);
+            Random rndSkill = new Random();
+            Skill usedSkill = characterClass.skillList[rndSkill.Next(0, characterClass.skillList.Count)];
+            Program.ut.TypeLine("The " + name + " tries to use " + usedSkill.skillName);
             Program.ut.TypeLine("It fails horribly, leaving it wide open to attack.");
         }
 
