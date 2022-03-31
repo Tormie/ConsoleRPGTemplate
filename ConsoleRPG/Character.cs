@@ -34,6 +34,7 @@ namespace ConsoleRPG
         /*  Some base stats */
         public Class characterClass;
         public Race characterRace;
+        public bool turnComplete = false;
 
         public int hp;
         public int baseHP;
@@ -77,11 +78,16 @@ namespace ConsoleRPG
         /*  Handles skill and status effect cooldowns */
         public void TurnManager()
         {
+            Console.WriteLine("Turnmanager Run on "+name);
             foreach (Skill s in characterClass.skillList)
             {
                 if (s.coolDownTimer > 0)
                 {
                     s.coolDownTimer--;
+                    if (s.coolDownTimer == 0)
+                    {
+                        Console.WriteLine("Skill " + s.skillName + " is no longer on cooldown");
+                    }
                 }
             }
             if (invulDuration > 0)

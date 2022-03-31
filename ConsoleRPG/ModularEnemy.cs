@@ -95,7 +95,10 @@ namespace ConsoleRPG
             {
                 Console.WriteLine(name + " is stunned and cannot take action this turn.");
             }
-            TurnManager();
+            if (turnComplete)
+            {
+                TurnManager();
+            }
         }
         void EnemyAttack()
         {
@@ -109,6 +112,7 @@ namespace ConsoleRPG
                 {
                     Program.ut.TypeLine("The enemy cannot seem to locate you, it spends its turn looking for you.");
                 }
+                turnComplete = true;
             }
             else
             {
@@ -126,14 +130,29 @@ namespace ConsoleRPG
                 {
                     Program.ut.TypeLine("It misses, leaving it wide open for you to retaliate!");
                 }
+                turnComplete = true;
             }
         }
         void EnemyUseSkill()
         {
             Random rndSkill = new Random();
             Skill usedSkill = characterClass.skillList[rndSkill.Next(0, characterClass.skillList.Count)];
-            Program.ut.TypeLine("The " + name + " tries to use " + usedSkill.skillName);
-            Program.ut.TypeLine("It fails horribly, leaving it wide open to attack.");
+            if (usedSkill.coolDownTimer <= 0)
+            {
+                if (usedSkill.targetsSelf)
+                {
+                    usedSkill.UseSkill(this, this);
+                } else
+                {
+                    usedSkill.UseSkill(Program.player, this);
+                }
+                turnComplete = true;
+            } else
+            {
+                Program.ut.TypeLine("The " + name + " tries to use " + usedSkill.skillName);
+                Program.ut.TypeLine("It fails horribly, leaving it wide open to attack.");
+                turnComplete = true;
+            }
         }
 
     }

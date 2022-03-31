@@ -113,7 +113,8 @@ namespace ConsoleRPG
                 {
                     break;
                 }
-                Program.player.PlayerAction();
+                Program.player.turnComplete = false;
+                Program.player.PlayerPreAction();
                 enemyHP = 0;
                 foreach (ModularEnemy e in modEnemyList)
                 {
@@ -130,7 +131,9 @@ namespace ConsoleRPG
                 else
                 {
                     Random rnd2 = new Random();
-                    modEnemyList[rnd2.Next(0, modEnemyList.Count)].EnemyAction();
+                    ModularEnemy enm = modEnemyList[rnd2.Next(0, modEnemyList.Count)];
+                    enm.turnComplete = false;
+                    enm.EnemyAction();
                 }
 
             }

@@ -37,28 +37,44 @@ namespace ConsoleRPG
 
         public void UseSkill(Character target, Character instigator)
         {
-            /*if (instigator is Player)
+            if (instigator == Program.player)
             {
-                if (coolDownTimer <= 0)
+                Console.WriteLine(instigator.name + " uses " + skillName + " on " + target.name);
+                if (targetsSelf)
                 {
-                    int damage = skillPower * Program.player.playerDamageMod;
-                    Program.ut.TypeLine(skillUseText + target.name + ". Doing " + damage + " to it.");
-                    target.TakeDamage(damage);
-                    coolDownTimer = skillCooldown;
+                    switch (damageType)
+                    {
+                        case "block":
+                            Program.ut.TypeLine(skillUseText);
+                            target.invulType = damageType;
+                            target.invulDuration = skillPower;
+                            target.isInvulnerable = true;
+                            coolDownTimer = skillCooldown;
+                            break;
+                        case "hide":
+                            Program.ut.TypeLine(skillUseText);
+                            target.invulType = damageType;
+                            target.invulDuration = skillPower;
+                            target.isInvulnerable = true;
+                            coolDownTimer = skillCooldown;
+                            break;
+                        case "healing":
+                            int healPower = instigator.magicDmgMod * 5;
+                            Program.ut.TypeLine(skillUseText);
+                            Program.ut.TypeLine("You are healed for " + healPower + " hit points.");
+                            target.TakeDamage(-healPower);
+                            if (target.hp > target.baseHP) { target.hp = target.baseHP; }
+                            coolDownTimer = skillCooldown;
+                            break;
+                    }
                 }
-                else
-                {
-                    Program.ut.TypeLine("Cooldown for " + skillName + " has not yet run out. Please wait " + coolDownTimer + " more turns.");
-                    Player p = (Player)instigator;
-                    p.PlayerAction();
-                }
+                
             }
-            else if (instigator is ModularEnemy)
+            else
             {
-
-            }*/
-            Console.WriteLine(instigator.name + " uses " + skillName + " on " + target.name);
-            
+                Console.WriteLine(instigator.name + " uses " + skillName + " on " + target.name);
+                coolDownTimer = skillCooldown;
+            } 
         }
     }
 }

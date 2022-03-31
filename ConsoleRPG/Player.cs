@@ -134,6 +134,15 @@ namespace ConsoleRPG
             Console.Clear();
         }
 
+        public void PlayerPreAction()
+        {
+            PlayerAction();
+            if (turnComplete)
+            {
+                TurnManager();
+            }
+        }
+
         public void PlayerAction()
         {
             if (!isStunned)
@@ -171,8 +180,8 @@ namespace ConsoleRPG
                 {
                     ViewEnemyCharacterSheet();
                 }
+                turnComplete = true;
             }
-            TurnManager();
         }
 
         public void PlayerUseSkill()
@@ -190,48 +199,68 @@ namespace ConsoleRPG
                 else { Console.Write("Targets other. | "); }
                 if (s.targetsAll) { Console.WriteLine("All targets."); }
                 else { Console.WriteLine("Single target."); }
-                string playerChoice = Program.ut.GetResponse("Which skill do you want to use?(Type Back to return).", choices.ToArray()).ToLower();
-                if (playerChoice.ToLower() == "back")
-                {
-                    PlayerAction();
-                    break;
-                }
+            }
+            string playerChoice = Program.ut.GetResponse("Which skill do you want to use?(Type Back to return).", choices.ToArray()).ToLower();
+            if (playerChoice.ToLower() == "back")
+            {
+                PlayerAction();
+            }
+            else
+            {
                 foreach (Skill sk in characterClass.skillList)
                 {
-                    if (sk.skillName.ToLower() == playerChoice)
+                    Console.WriteLine(sk.skillName);
+                    Console.WriteLine(sk.targetsSelf);
+                    if (sk.skillName.ToLower() == playerChoice.ToLower())
                     {
-                        if (sk.targetsSelf) { sk.UseSkill(this, this); }
-                        if (!sk.targetsSelf)
+                        if (sk.coolDownTimer > 0)
                         {
-                            if (sk.targetsAll)
+                            Program.ut.TypeLine("Cooldown for " + sk.skillName + " has not expired, please wait " + sk.coolDownTimer + " more turns.");
+                            PlayerAction();
+                            break;
+                        }
+                        else
+                        {
+                            if (sk.targetsSelf)
                             {
-                                sk.UseSkill(Program.currentEncounter.modEnemyList[0], this);
+                                sk.UseSkill(this, this);
+                                turnComplete = true;
                             }
-                            else
+                            if (!sk.targetsSelf)
                             {
-                                if (Program.currentEncounter.modEnemyList.Count == 1)
+                                if (sk.targetsAll)
                                 {
-                                    target = Program.currentEncounter.modEnemyList[0];
+                                    sk.UseSkill(Program.currentEncounter.modEnemyList[0], this);
+                                    turnComplete = true;
                                 }
                                 else
                                 {
-                                    Console.WriteLine("On which enemy?(Choose the number)");
-                                    foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
+                                    if (Program.currentEncounter.modEnemyList.Count == 1)
                                     {
-                                        if (e.hp > 0)
-                                        {
-                                            Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.wieldedWeapon.name + ")");
-                                        }
+                                        target = Program.currentEncounter.modEnemyList[0];
                                     }
-                                    string playerInput = Console.ReadLine();
-                                    int iTarget = Int32.Parse(playerInput);
-                                    target = Program.currentEncounter.modEnemyList[iTarget];
+                                    else
+                                    {
+                                        Console.WriteLine("On which enemy?(Choose the number)");
+                                        foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
+                                        {
+                                            if (e.hp > 0)
+                                            {
+                                                Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.wieldedWeapon.name + ")");
+                                            }
+                                        }
+                                        string playerInput = Console.ReadLine();
+                                        int iTarget = Int32.Parse(playerInput);
+                                        target = Program.currentEncounter.modEnemyList[iTarget];
+                                    }
                                     sk.UseSkill(target, this);
+                                    turnComplete = true;
                                 }
                             }
+                            break;
                         }
                     }
-                    break;
+
                 }
             }
         }
@@ -271,7 +300,7 @@ namespace ConsoleRPG
                 {
                     Program.ut.TypeLine("Your attack bounces off harmlessly. You deal no damage to the enemy.");
                 }
-                if (target.invulType == "stealth")
+                if (target.invulType == "hide")
                 {
                     Program.ut.TypeLine("You cannot seem to locate the enemy. You spend your turn looking for it.");
                 }
@@ -293,6 +322,7 @@ namespace ConsoleRPG
                 }
                 target.TakeDamage(damage);
             }
+            turnComplete = true;
         }
 
         public void ViewPlayerCharacterSheet()
