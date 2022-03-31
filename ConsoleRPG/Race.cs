@@ -18,5 +18,11 @@ namespace ConsoleRPG
             raceConMod = rCmod;
             raceIntMod = rImod;
         }
+
+        public Race Clone()
+        {
+            Race r = new Race(this.raceName, this.raceStrMod, this.raceAgiMod, this.raceConMod, this.raceIntMod);
+            return r;
+        }
     }
 }

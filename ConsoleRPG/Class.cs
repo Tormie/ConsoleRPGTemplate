@@ -25,5 +25,11 @@ namespace ConsoleRPG
             classIntMod = cIMod;
             skillList = cSkills;
         }
+
+        public Class Clone()
+        {
+            Class c = new Class(this.className,this.classBaseHP,this.classHPPerLevel,this.classStrMod, this.classAgiMod, this.classConMod, this.classIntMod, this.skillList);
+            return c;
+        }
     }
 }

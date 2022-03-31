@@ -66,7 +66,7 @@ namespace ConsoleRPG
             {
                 if (p.raceName.ToLower() == playerChoice)
                 {
-                    characterRace = p;
+                    characterRace = p.Clone();
                 }
             }
             Program.ut.TypeLine("You chose to be a " + characterRace.raceName);
@@ -100,7 +100,7 @@ namespace ConsoleRPG
             {
                 if (p.className.ToLower() == playerChoice)
                 {
-                    characterClass = p;
+                    characterClass = p.Clone();
                 }
             }
             Program.ut.TypeLine("Congratulations! You are now a mighty " + characterClass.className);
@@ -179,6 +179,61 @@ namespace ConsoleRPG
         {
             ModularEnemy target = null;
             Console.WriteLine("Which skill do you want to use?(Type Back to return)");
+            List<string> choices = new List<string>();
+            choices.Add("Back");
+            foreach (Skill s in characterClass.skillList)
+            {
+                choices.Add(s.skillName);
+                Console.WriteLine(s.skillName + "(" + s.damageType + ")");
+                Console.WriteLine("Cooldown: " + s.skillCooldown + " Power: " + s.skillPower);
+                if (s.targetsSelf) { Console.Write("Targets self. | "); }
+                else { Console.Write("Targets other. | "); }
+                if (s.targetsAll) { Console.WriteLine("All targets."); }
+                else { Console.WriteLine("Single target."); }
+                string playerChoice = Program.ut.GetResponse("Which skill do you want to use?(Type Back to return).", choices.ToArray()).ToLower();
+                if (playerChoice.ToLower() == "back")
+                {
+                    PlayerAction();
+                    break;
+                }
+                foreach (Skill sk in characterClass.skillList)
+                {
+                    if (sk.skillName.ToLower() == playerChoice)
+                    {
+                        if (sk.targetsSelf) { sk.UseSkill(this, this); }
+                        if (!sk.targetsSelf)
+                        {
+                            if (sk.targetsAll)
+                            {
+                                sk.UseSkill(Program.currentEncounter.modEnemyList[0], this);
+                            }
+                            else
+                            {
+                                if (Program.currentEncounter.modEnemyList.Count == 1)
+                                {
+                                    target = Program.currentEncounter.modEnemyList[0];
+                                }
+                                else
+                                {
+                                    Console.WriteLine("On which enemy?(Choose the number)");
+                                    foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
+                                    {
+                                        if (e.hp > 0)
+                                        {
+                                            Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.wieldedWeapon.name + ")");
+                                        }
+                                    }
+                                    string playerInput = Console.ReadLine();
+                                    int iTarget = Int32.Parse(playerInput);
+                                    target = Program.currentEncounter.modEnemyList[iTarget];
+                                    sk.UseSkill(target, this);
+                                }
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
         }
 
         public void PlayerAttack()

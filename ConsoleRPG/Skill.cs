@@ -37,7 +37,7 @@ namespace ConsoleRPG
 
         public void UseSkill(Character target, Character instigator)
         {
-            if (instigator is Player)
+            /*if (instigator is Player)
             {
                 if (coolDownTimer <= 0)
                 {
@@ -56,7 +56,8 @@ namespace ConsoleRPG
             else if (instigator is ModularEnemy)
             {
 
-            }
+            }*/
+            Console.WriteLine(instigator.name + " uses " + skillName + " on " + target.name);
             
         }
     }

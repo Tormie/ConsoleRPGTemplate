@@ -61,6 +61,11 @@ namespace ConsoleRPG
             foreach(Skill s in target.characterClass.skillList)
             {
                 Console.WriteLine(s.skillName + "(" + s.damageType+")");
+                Console.WriteLine("Cooldown: " + s.skillCooldown + " Power: " + s.skillPower);
+                if (s.targetsSelf) { Console.Write("Targets self. | " ); }
+                else { Console.Write("Targets other. | " ); }
+                if (s.targetsAll) { Console.WriteLine("All targets."); }
+                else { Console.WriteLine("Single target."); }
             }
             Console.WriteLine();
         }

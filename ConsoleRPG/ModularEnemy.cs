@@ -30,9 +30,9 @@ namespace ConsoleRPG
         public void InitModularEnemy()
         {
             Random rnd = new Random();
-            characterClass = Program.dl.classList[rnd.Next(0, Program.dl.classList.Count)];
+            characterClass = Program.dl.classList[rnd.Next(0, Program.dl.classList.Count)].Clone();
             rnd = new Random();
-            characterRace = Program.dl.raceList[rnd.Next(0, Program.dl.raceList.Count)];
+            characterRace = Program.dl.raceList[rnd.Next(0, Program.dl.raceList.Count)].Clone();
             name = characterRace.raceName + " " + characterClass.className;
         }
 
