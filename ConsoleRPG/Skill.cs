@@ -37,30 +37,34 @@ namespace ConsoleRPG
 
         public void UseSkill(Character target, Character instigator)
         {
+            int damage = 0;
+            // If UseSkill called by player.
             if (instigator == Program.player)
             {
                 Console.WriteLine(instigator.name + " uses " + skillName + " on " + target.name);
                 if (targetsSelf)
+                    // If skill targets self
                 {
                     switch (damageType)
                     {
                         case "block":
-                            Program.ut.TypeLine(skillUseText);
+                            Program.ut.TypeLine(instigator.name + " " + skillUseText);
                             target.invulType = damageType;
                             target.invulDuration = skillPower;
                             target.isInvulnerable = true;
                             coolDownTimer = skillCooldown;
                             break;
                         case "hide":
-                            Program.ut.TypeLine(skillUseText);
+                            Program.ut.TypeLine(instigator.name + " " + skillUseText);
                             target.invulType = damageType;
                             target.invulDuration = skillPower;
                             target.isInvulnerable = true;
                             coolDownTimer = skillCooldown;
                             break;
                         case "healing":
-                            int healPower = instigator.magicDmgMod * 5;
-                            Program.ut.TypeLine(skillUseText);
+                            int healPower = instigator.magicDmgMod * skillPower;
+                            healPower = Math.Clamp(healPower, 5, 100);
+                            Program.ut.TypeLine(instigator.name + " " + skillUseText);
                             Program.ut.TypeLine("You are healed for " + healPower + " hit points.");
                             target.TakeDamage(-healPower);
                             if (target.hp > target.baseHP) { target.hp = target.baseHP; }
@@ -68,12 +72,142 @@ namespace ConsoleRPG
                             break;
                     }
                 }
-                
+                else
+                {
+                    // If skill targets all enemies
+                    if (targetsAll)
+                    {
+                        switch (damageType.ToLower())
+                        {
+                            case "standard":
+                                Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                                Random wpnRnd = new Random();
+                                int wpdmg = wpnRnd.Next(Program.player.playerWeapon.dmgMin, Program.player.playerWeapon.dmgMax + 1);
+                                damage = skillPower * Math.Clamp(wpdmg + Program.player.meleeDmgMod, 1, 20);
+                                foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
+                                {
+                                    e.TakeDamage(damage);
+                                    Console.WriteLine(e.name + " takes " + damage + " damage from the " + skillName);
+                                }
+                                coolDownTimer = skillCooldown;
+                                break;
+                            case "magic":
+                                Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                                damage = skillPower * Math.Clamp(Program.player.magicDmgMod, 1, 10);
+                                foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
+                                {
+                                    e.TakeDamage(damage);
+                                    Console.WriteLine(e.name + " takes " + damage + " damage from the " + skillName);
+                                }
+                                coolDownTimer = skillCooldown;
+                                break;
+                            case "stun":
+                                Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                                foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
+                                {
+                                    e.stunDuration =skillPower;
+                                    e.isStunned = true;
+                                    Console.WriteLine(e.name + " is stunned for "+skillPower+ " turns.");
+                                }
+                                coolDownTimer = skillCooldown;
+                                break;
+                        }
+                    } else
+                    {
+                        //If skill targets single enemy
+                        switch (damageType.ToLower())
+                        {
+                            case "standard":
+                                Program.ut.TypeLine(instigator.name + " " +skillUseText);
+                                Random wpnRnd = new Random();
+                                int wpdmg = wpnRnd.Next(Program.player.playerWeapon.dmgMin, Program.player.playerWeapon.dmgMax + 1);
+                                damage = skillPower * Math.Clamp(wpdmg + Program.player.meleeDmgMod, 1, 20);
+                                target.TakeDamage(damage);
+                                Console.WriteLine(target.name + " takes " + damage + " damage from the " + skillName);
+                                coolDownTimer = skillCooldown;
+                                break;
+                            case "magic":
+                                Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                                damage = skillPower * Math.Clamp(Program.player.magicDmgMod, 1, 10);
+                                target.TakeDamage(damage);
+                                Console.WriteLine(target.name + " takes " + damage + " damage from the " + skillName);
+                                coolDownTimer = skillCooldown;
+                                break;
+                            case "stun":
+                                Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                                target.stunDuration = skillPower;
+                                target.isStunned = true;
+                                Console.WriteLine(target.name + " is stunned for " + skillPower + " turns.");
+                                coolDownTimer = skillCooldown;
+                                break;
+                        }
+                    }
+                }
             }
             else
             {
-                Console.WriteLine(instigator.name + " uses " + skillName + " on " + target.name);
-                coolDownTimer = skillCooldown;
+                ModularEnemy instEnemy = (ModularEnemy)instigator;
+                Console.WriteLine(instEnemy.name + " uses " + skillName + " on " + target.name);
+                if (targetsSelf)
+                // If skill targets self
+                {
+                    switch (damageType)
+                    {
+                        case "block":
+                            Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                            instEnemy.invulType = damageType;
+                            instEnemy.invulDuration = skillPower;
+                            instEnemy.isInvulnerable = true;
+                            coolDownTimer = skillCooldown;
+                            break;
+                        case "hide":
+                            Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                            instEnemy.invulType = damageType;
+                            instEnemy.invulDuration = skillPower;
+                            instEnemy.isInvulnerable = true;
+                            coolDownTimer = skillCooldown;
+                            break;
+                        case "healing":
+                            int healPower = instEnemy.magicDmgMod * skillPower;
+                            healPower = Math.Clamp(healPower, 5, 100);
+                            Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                            Program.ut.TypeLine("You are healed for " + healPower + " hit points.");
+                            instEnemy.TakeDamage(-healPower);
+                            if (instEnemy.hp > instEnemy.baseHP) { instEnemy.hp = instEnemy.baseHP; }
+                            coolDownTimer = skillCooldown;
+                            break;
+                    }
+                }
+                else
+                {
+                    // If skill targets enemy
+                    switch (damageType.ToLower())
+                    {
+                        case "standard":
+                            Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                            Random wpnRnd = new Random();
+                            int wpdmg = wpnRnd.Next(instEnemy.wieldedWeapon.dmgMin, instEnemy.wieldedWeapon.dmgMax + 1);
+                            damage = skillPower * Math.Clamp(wpdmg + instEnemy.meleeDmgMod, 1, 20);
+                            target.TakeDamage(damage);
+                            Console.WriteLine(target.name + " takes " + damage + " damage from the " + skillName);
+                            coolDownTimer = skillCooldown;
+                            break;
+                        case "magic":
+                            Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                            damage = skillPower * Math.Clamp(instEnemy.magicDmgMod, 1, 10);
+                            target.TakeDamage(damage);
+                            Console.WriteLine(target.name + " takes " + damage + " damage from the " + skillName);
+                            coolDownTimer = skillCooldown;
+                            break;
+                        case "stun":
+                            Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                            target.stunDuration = skillPower;
+                            target.isStunned = true;
+                            Console.WriteLine(target.name + " is stunned for " + skillPower + " turns.");
+                            coolDownTimer = skillCooldown;
+                            break;
+                    } 
+                }
             } 
         }
     }

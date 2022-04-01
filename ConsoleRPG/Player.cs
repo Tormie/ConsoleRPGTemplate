@@ -190,8 +190,10 @@ namespace ConsoleRPG
             Console.WriteLine("Which skill do you want to use?(Type Back to return)");
             List<string> choices = new List<string>();
             choices.Add("Back");
+            choices.Add("Kill");
             foreach (Skill s in characterClass.skillList)
             {
+                // List possible skill choices
                 choices.Add(s.skillName);
                 Console.WriteLine(s.skillName + "(" + s.damageType + ")");
                 Console.WriteLine("Cooldown: " + s.skillCooldown + " Power: " + s.skillPower);
@@ -203,11 +205,13 @@ namespace ConsoleRPG
             string playerChoice = Program.ut.GetResponse("Which skill do you want to use?(Type Back to return).", choices.ToArray()).ToLower();
             if (playerChoice.ToLower() == "back")
             {
+                // Revert to player action choice
                 PlayerAction();
             }
             else
             {
                 foreach (Skill sk in characterClass.skillList)
+                    // Select skill that has been chosen
                 {
                     Console.WriteLine(sk.skillName);
                     Console.WriteLine(sk.targetsSelf);
@@ -215,6 +219,7 @@ namespace ConsoleRPG
                     {
                         if (sk.coolDownTimer > 0)
                         {
+                            // Do not use skill if cooldown has not expired
                             Program.ut.TypeLine("Cooldown for " + sk.skillName + " has not expired, please wait " + sk.coolDownTimer + " more turns.");
                             PlayerAction();
                             break;
@@ -223,6 +228,7 @@ namespace ConsoleRPG
                         {
                             if (sk.targetsSelf)
                             {
+                                // Use skill on self
                                 sk.UseSkill(this, this);
                                 turnComplete = true;
                             }
@@ -230,6 +236,7 @@ namespace ConsoleRPG
                             {
                                 if (sk.targetsAll)
                                 {
+                                    // Use skill on all enemies
                                     sk.UseSkill(Program.currentEncounter.modEnemyList[0], this);
                                     turnComplete = true;
                                 }
@@ -237,10 +244,12 @@ namespace ConsoleRPG
                                 {
                                     if (Program.currentEncounter.modEnemyList.Count == 1)
                                     {
+                                        // If a single enemy, set target to that one
                                         target = Program.currentEncounter.modEnemyList[0];
                                     }
                                     else
                                     {
+                                        // If multiple enemies, allow player to select target
                                         Console.WriteLine("On which enemy?(Choose the number)");
                                         foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
                                         {
@@ -253,6 +262,7 @@ namespace ConsoleRPG
                                         int iTarget = Int32.Parse(playerInput);
                                         target = Program.currentEncounter.modEnemyList[iTarget];
                                     }
+                                    // Use skill on set target
                                     sk.UseSkill(target, this);
                                     turnComplete = true;
                                 }
@@ -369,6 +379,7 @@ namespace ConsoleRPG
         {
             Program.ut.TypeLine("Suffering the ultimate defeat, your final breath escapes you.");
             isAlive = false;
+            Program.GameOver();
         }
     }
 }

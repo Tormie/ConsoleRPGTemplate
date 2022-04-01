@@ -64,7 +64,7 @@ namespace ConsoleRPG
         }
 
         /*  Ends the game, might want to add this to the EndGame() function */
-        static void GameOver()
+        public static void GameOver()
         {
             ut.TypeLine("You lie on the floor, beaten to a bloody pulp by the monsters.");
             ut.TypeLine("You managed to survive " + encountersWon + " encounters.");
