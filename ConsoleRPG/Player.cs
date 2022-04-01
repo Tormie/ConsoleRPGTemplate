@@ -13,6 +13,7 @@ namespace ConsoleRPG
         public Weapon playerWeapon = null;
         public int playerDamageMod = 1;
         public int playerXP = 0;
+        int statBoostRate = 3;
 
         public Player(string pName)
         {
@@ -32,11 +33,41 @@ namespace ConsoleRPG
         {
             Console.Clear();
             level++;
-            baseHP = characterClass.classBaseHP + hpMod * level;
-            hp = baseHP;
             Random msg = new Random();
             Program.ut.TypeLine(Program.dl.levelUpMessages[msg.Next(0, Program.dl.levelUpMessages.Count)]);
             Program.ut.TypeLine("You have reached level " + level + ". Your HP has increased to " + hp + ".");
+            if (level % statBoostRate == 0)
+            {
+                IncreaseStats();
+            }
+            SetStats();
+            Program.ut.EnterToCont();
+        }
+
+        public void IncreaseStats()
+        {
+            List<string> choices = new List<string>();
+            choices.Add("Strength");
+            choices.Add("Agility");
+            choices.Add("Constitution");
+            choices.Add("Intelligence");
+            string playerChoice = Program.ut.GetResponse("Please select a stat to increase:", choices.ToArray()).ToLower();
+            switch (playerChoice.ToLower())
+            {
+                case "strength":
+                    strLvlMod++;
+                    break;
+                case "agility":
+                    agLvlMod++;
+                    break;
+                case "constitution":
+                    conLvlMod++;
+                    break;
+                case "intelligence":
+                    intLvlMod++;
+                    break;
+            }
+            SetStats();
         }
 
         public void InitPlayer()

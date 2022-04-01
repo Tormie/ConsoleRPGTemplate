@@ -22,6 +22,7 @@ namespace ConsoleRPG
         public int dodgeMod;
         public int hpMod;
         public int magicDmgMod;
+        public int strLvlMod, agLvlMod, conLvlMod, intLvlMod = 0;
 
         /*  Status types for characters. 
          *  used to implement different skill effects */
@@ -45,17 +46,17 @@ namespace ConsoleRPG
         /*  Initialize derivative stats based on base stats. */
         public void SetStats()
         {
-            strength += characterClass.classStrMod + characterRace.raceStrMod;
-            agility += characterClass.classAgiMod + characterRace.raceAgiMod;
-            constitution += characterClass.classConMod + characterRace.raceConMod;
-            intelligence += characterClass.classIntMod + characterRace.raceIntMod;
+            strength = 5 + characterClass.classStrMod + characterRace.raceStrMod + strLvlMod;
+            agility = 5 + characterClass.classAgiMod + characterRace.raceAgiMod + agLvlMod;
+            constitution = 5 + characterClass.classConMod + characterRace.raceConMod + conLvlMod;
+            intelligence = 5 + characterClass.classIntMod + characterRace.raceIntMod + intLvlMod;
 
             meleeDmgMod = strength - 5;
             toHitMod = agility - 5;
             dodgeMod = agility - 5;
             hpMod = constitution - 5 + characterClass.classHPPerLevel;
             magicDmgMod = intelligence - 5;
-            baseHP = hp + hpMod;
+            baseHP = hp + hpMod * level;
             hp = baseHP;
         }
 

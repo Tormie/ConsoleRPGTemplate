@@ -14,7 +14,7 @@ namespace ConsoleRPG
         public int hitChance = 50;
         public int enemyHPmod = -50;
         public int xpMod = 0;
-        public int xpValue = 200;
+        public int xpValue = 1000;
 
         public ModularEnemy()
         {
