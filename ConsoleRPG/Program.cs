@@ -9,7 +9,6 @@ namespace ConsoleRPG
 {
     class Program
     {
-        /* Dit gaat fout */
         /*  Init classes and several base vars */
         public static Utils ut = new Utils();
         public static DataLib dl = new DataLib();
