@@ -26,10 +26,6 @@ namespace ConsoleRPG
             classIntMod = cIMod;
             skillList = cSkills;
             classShort = name + " (hp: " + bHP + "(+" + hpLvl + " /lvl) str: " + cSMod + " agi: " + cAMod + " con: " + cCMod + " int: " + cIMod + " skills:";
-            foreach (Skill s in cSkills)
-            {
-                classShort += " " + s.skillName;
-            }
         }
 
         public Class Clone()

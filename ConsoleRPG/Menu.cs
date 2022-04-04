@@ -12,8 +12,22 @@ namespace ConsoleRPG
             menuOptions = options;
         }
 
+        public void PrintInit()
+        {
+            for (int i = 0; i < menuOptions.Count; i++)
+            {
+                Console.ResetColor();
+                if (i == selectedOption)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                }
+                Console.WriteLine(menuOptions[i]);
+            }
+        }
+
         public int Run()
         {
+            PrintInit();
             ConsoleKeyInfo keyInfo;
             do
             {

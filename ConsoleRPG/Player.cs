@@ -154,18 +154,21 @@ namespace ConsoleRPG
             List<string> choices = new List<string>();
             foreach (Weapon w in Program.dl.playerWeaponList)
             {
-                choices.Add(w.name);
+                choices.Add(w.wpShort);
                 Console.WriteLine(w.name + " doing " + w.dmgMin + " to " + w.dmgMax + " damage. Crit Chance: "+w.critChance+" for "+w.critMult+" times damage.");
                 Console.WriteLine("---------------------");
             }
-            string playerChoice = Program.ut.GetResponse("Please enter the name of your weapon of choice:", choices.ToArray()).ToLower();
+            Program.menu = new Menu(choices);
+            int menuOption = Program.menu.Run();
+            playerWeapon = Program.dl.playerWeaponList[menuOption].Clone();
+            /*string playerChoice = Program.ut.GetResponse("Please enter the name of your weapon of choice:", choices.ToArray()).ToLower();
             foreach (Weapon w in Program.dl.playerWeaponList)
             {
                 if (w.name.ToLower() == playerChoice)
                 {
                     playerWeapon = w.Clone();
                 }
-            }
+            }*/
             Program.ut.TypeLine("You have chosen to wield a " + playerWeapon.name + ". It does " + playerWeapon.dmgMin + " to " + playerWeapon.dmgMax + " damage.");
             Program.ut.EnterToCont();
             Console.Clear();

@@ -13,6 +13,7 @@ namespace ConsoleRPG
         public int critChance;
         public int critMult;
         public string name;
+        public string wpShort;
 
         public Weapon(string wName, int minDmg, int maxDmg, int critC, int critD)
         {
@@ -21,6 +22,7 @@ namespace ConsoleRPG
             dmgMax = maxDmg;
             critChance = critC;
             critMult = critD;
+            wpShort = wName + " dmg: " + dmgMin + "-" + dmgMax + " (crit: " + critChance + "% - x" + critMult + ")";
         }
 
         public Weapon Clone()
