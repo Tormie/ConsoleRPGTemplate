@@ -8,6 +8,7 @@ namespace ConsoleRPG
         public int raceAgiMod;
         public int raceConMod;
         public int raceIntMod;
+        public string raceShort;
 
 
         public Race(string name, int rSmod, int rAmod, int rCmod, int rImod)
@@ -17,6 +18,7 @@ namespace ConsoleRPG
             raceAgiMod = rAmod;
             raceConMod = rCmod;
             raceIntMod = rImod;
+            raceShort = name + " (str: " + rSmod + " agi: " + rAmod + " con: " + rCmod + " int: " + rImod;
         }
 
         public Race Clone()
