@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace ConsoleRPG
 {
     public class DataLib
-    {
+    { 
         public List<Weapon> playerWeaponList;
         public List<Class> classList;
         public List<Skill> skillList;

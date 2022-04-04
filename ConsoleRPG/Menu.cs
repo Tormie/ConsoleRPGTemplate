@@ -6,10 +6,12 @@ namespace ConsoleRPG
     {
         public List<string> menuOptions = new List<string>();
         public int selectedOption = 0;
+        string displayText;
 
-        public Menu(List<string> options)
+        public Menu(List<string> options, string topText)
         {
             menuOptions = options;
+            displayText = topText;
         }
 
         public void PrintInit()
@@ -47,6 +49,7 @@ namespace ConsoleRPG
                     return selectedOption;
                 }
                 Console.Clear();
+                Console.Write(displayText);
                 for (int i = 0; i < menuOptions.Count; i++)
                 {
                     Console.ResetColor();

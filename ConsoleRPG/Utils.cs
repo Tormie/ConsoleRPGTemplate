@@ -39,6 +39,19 @@ namespace ConsoleRPG
             Console.WriteLine(System.AppContext.BaseDirectory);
         }
 
+        public string expandString(string input, int desiredLength)
+        {
+            string target = input;
+            if (input.Length < desiredLength)
+            {
+                for (int i = 0; i < desiredLength-input.Length; i++)
+                {
+                    target += " ";
+                }
+            }
+            return target;
+        }
+
         public void PrintCharacterSheet(Player target)
         {
             PrintHorizontalLine();
@@ -102,6 +115,18 @@ namespace ConsoleRPG
             {
                 Console.Write("-");
             }
+        }
+
+        public string ReturnHorizontalLine()
+        {
+            int cWidth = Console.WindowWidth;
+            string result = "";
+            for (int i = 0; i < cWidth; i++)
+            {
+                result += "-";
+            }
+            //result += "\n";
+            return result;
         }
 
         public string GetResponse(string question, string[] options)

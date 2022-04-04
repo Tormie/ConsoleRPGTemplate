@@ -82,27 +82,47 @@ namespace ConsoleRPG
         {
             System.Threading.Thread.Sleep(250);
             Console.Clear();
-            Console.WriteLine(name + "! Please choose your race.");
             List<string> choices = new List<string>();
+            List<Race> tempRaceList = Program.dl.raceList;
+            string hugeString = "";
+            hugeString += name + "! Please choose your race.\n";
+            int tempLength = tempRaceList.Count;
+            for (int i = 0; i <= tempLength -1; i+=3)
+            {
+                if ((tempLength - i) / 3 >= 1)
+                {
+                    hugeString += Program.ut.ReturnHorizontalLine();
+                    hugeString += (Program.ut.expandString(tempRaceList[i].raceName, 24) + "|" + Program.ut.expandString(tempRaceList[i + 1].raceName, 24) + "|" + Program.ut.expandString(tempRaceList[i + 2].raceName, 24) + "\n");
+                    hugeString += (Program.ut.expandString("str: "+tempRaceList[i].raceStrMod + " agi: " + tempRaceList[i].raceAgiMod, 24) + "|" + Program.ut.expandString("str: " + tempRaceList[i + 1].raceStrMod + " agi: " + tempRaceList[i + 1].raceAgiMod, 24) + "|" + Program.ut.expandString("str: " + tempRaceList[i + 2].raceStrMod + " agi: " + tempRaceList[i + 2].raceAgiMod, 24) + "\n");
+                    hugeString += (Program.ut.expandString("con: " + tempRaceList[i].raceConMod + " int: " + tempRaceList[i].raceIntMod, 24) + "|" + Program.ut.expandString("con: " + tempRaceList[i + 1].raceConMod + " int: " + tempRaceList[i + 1].raceIntMod, 24) + "|" + Program.ut.expandString("con: " + tempRaceList[i + 2].raceConMod + " int: " + tempRaceList[i + 2].raceIntMod, 24) + "\n");
+
+                }
+                else if ((tempLength - i) % 3 == 2)
+                {
+                    hugeString += Program.ut.ReturnHorizontalLine();
+                    hugeString += (Program.ut.expandString(tempRaceList[i].raceName, 24) + "|" + Program.ut.expandString(tempRaceList[i + 1].raceName, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("str: " + tempRaceList[i].raceStrMod + " agi: " + tempRaceList[i].raceAgiMod, 24) + "|" + Program.ut.expandString("str: " + tempRaceList[i + 1].raceStrMod + " agi: " + tempRaceList[i + 1].raceAgiMod, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("con: " + tempRaceList[i].raceConMod + " int: " + tempRaceList[i].raceIntMod, 24) + "|" + Program.ut.expandString("con: " + tempRaceList[i + 1].raceConMod + " int: " + tempRaceList[i + 1].raceIntMod, 24) + "|" + "\n");
+
+                }
+                else if ((tempLength - i) % 3 == 1)
+                {
+                    hugeString += Program.ut.ReturnHorizontalLine();
+                    hugeString += (Program.ut.expandString(tempRaceList[i].raceName, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("str: " + tempRaceList[i].raceStrMod + " agi: " + tempRaceList[i].raceAgiMod, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("con: " + tempRaceList[i].raceConMod + " int: " + tempRaceList[i].raceIntMod, 24) + "|" + "\n");
+                }
+            }
+            hugeString += Program.ut.ReturnHorizontalLine();
+            hugeString += "\n";
+            Console.Write(hugeString);
             foreach (Race p in Program.dl.raceList)
             {
                 choices.Add(p.raceShort);
-                Console.WriteLine("Name " + p.raceName);
-                Console.Write("Str: " + p.raceStrMod + " Agi: " + p.raceAgiMod + "\n");
-                Console.Write("Con: " + p.raceConMod + " Int: " + p.raceIntMod + "\n");
-                Console.WriteLine("---------------------");
             }
-            Program.menu = new Menu(choices);
+            Program.menu = new Menu(choices, hugeString);
             int menuOption = Program.menu.Run();
             characterRace = Program.dl.raceList[menuOption].Clone();
-            //string playerChoice = Program.ut.GetResponse("Please enter the name of the race you choose to be:", choices.ToArray()).ToLower();
-            //foreach (Race p in Program.dl.raceList)
-            //{
-            //    if (p.raceName.ToLower() == playerChoice)
-            //    {
-            //        characterRace = p.Clone();
-            //    }
-            //}
             Program.ut.TypeLine("You chose to be a " + characterRace.raceName);
             Program.ut.EnterToCont();
         }
@@ -111,35 +131,58 @@ namespace ConsoleRPG
         {
             System.Threading.Thread.Sleep(250);
             Console.Clear();
-            Console.WriteLine(name + "! Please choose your class.");
+            List<Class> tempClassList = Program.dl.classList;
+            string hugeString = "";
+            hugeString += name + "! Please choose your class.\n";
             List<string> choices = new List<string>();
+            int tempLength = tempClassList.Count;
+
+            for (int i = 0; i <= tempLength - 1; i += 3)
+            {
+                if ((tempLength - i) / 3 >= 1)
+                {
+                    hugeString += Program.ut.ReturnHorizontalLine();
+                    hugeString += (Program.ut.expandString(tempClassList[i].className, 24) + "|" + Program.ut.expandString(tempClassList[i+1].className, 24) + "|" + Program.ut.expandString(tempClassList[i+2].className, 24) + "\n");
+                    hugeString += (Program.ut.expandString("HP: "+ tempClassList[i].classBaseHP + "("+ tempClassList[i].classHPPerLevel + "/lvl)", 24) + "|" + Program.ut.expandString("HP: " + tempClassList[i+1].classBaseHP + "(" + tempClassList[i+1].classHPPerLevel + "/lvl)", 24) + "|" + Program.ut.expandString("HP: " + tempClassList[i+2].classBaseHP + "(" + tempClassList[i+2].classHPPerLevel + "/lvl)", 24) + "\n");
+                    hugeString += (Program.ut.expandString("str: " + tempClassList[i].classStrMod + " agi: " + tempClassList[i].classAgiMod, 24) + "|" + Program.ut.expandString("str: " + tempClassList[i + 1].classStrMod + " agi: " + tempClassList[i + 1].classAgiMod, 24) + "|" + Program.ut.expandString("str: " + tempClassList[i + 2].classStrMod + " agi: " + tempClassList[i + 2].classAgiMod, 24) + "\n");
+                    hugeString += (Program.ut.expandString("con: " + tempClassList[i].classConMod + " int: " + tempClassList[i].classIntMod, 24) + "|" + Program.ut.expandString("con: " + tempClassList[i + 1].classConMod + " int: " + tempClassList[i + 1].classIntMod, 24) + "|" + Program.ut.expandString("con: " + tempClassList[i + 2].classConMod + " int: " + tempClassList[i + 2].classIntMod, 24) + "\n");
+                    hugeString += (Program.ut.expandString("Skills: " + tempClassList[i].skillList[0].skillName, 24) + "|" + Program.ut.expandString("Skills: " + tempClassList[i + 1].skillList[0].skillName, 24) + "|" + Program.ut.expandString("Skills: " + tempClassList[i + 2].skillList[0].skillName, 24) + "\n");
+                    hugeString += (Program.ut.expandString("        " + tempClassList[i].skillList[1].skillName, 24) + "|" + Program.ut.expandString("        " + tempClassList[i + 1].skillList[1].skillName, 24) + "|" + Program.ut.expandString("        " + tempClassList[i + 2].skillList[1].skillName, 24) + "\n");
+
+                }
+                else if ((tempLength - i) % 3 == 2)
+                {
+                    hugeString += Program.ut.ReturnHorizontalLine();
+                    hugeString += (Program.ut.expandString(tempClassList[i].className, 24) + "|" + Program.ut.expandString(tempClassList[i+1].className, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("HP: " + tempClassList[i].classBaseHP + "(" + tempClassList[i].classHPPerLevel + "/lvl)", 24) + "|" + Program.ut.expandString("HP: " + tempClassList[i + 1].classBaseHP + "(" + tempClassList[i + 1].classHPPerLevel + "/lvl)", 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("str: " + tempClassList[i].classStrMod + " agi: " + tempClassList[i].classAgiMod, 24) + "|" + Program.ut.expandString("str: " + tempClassList[i + 1].classStrMod + " agi: " + tempClassList[i + 1].classAgiMod, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("con: " + tempClassList[i].classConMod + " int: " + tempClassList[i].classIntMod, 24) + "|" + Program.ut.expandString("con: " + tempClassList[i + 1].classConMod + " int: " + tempClassList[i + 1].classIntMod, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("Skills: " + tempClassList[i].skillList[0].skillName, 24) + "|" + Program.ut.expandString("Skills: " + tempClassList[i + 1].skillList[0].skillName, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("        " + tempClassList[i].skillList[1].skillName, 24) + "|" + Program.ut.expandString("        " + tempClassList[i + 1].skillList[1].skillName, 24) + "|" + "\n");
+                }
+                else if ((tempLength - i) % 3 == 1)
+                {
+                    hugeString += Program.ut.ReturnHorizontalLine();
+                    hugeString += (Program.ut.expandString(tempClassList[i].className, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("HP: " + tempClassList[i].classBaseHP + "(" + tempClassList[i].classHPPerLevel + "/lvl)", 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("str: " + tempClassList[i].classStrMod + " agi: " + tempClassList[i].classAgiMod, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("con: " + tempClassList[i].classConMod + " int: " + tempClassList[i].classIntMod, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("Skills: " + tempClassList[i].skillList[0].skillName, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("        " + tempClassList[i].skillList[1].skillName, 24) + "|" + "\n");
+
+                }
+            }
+            hugeString += Program.ut.ReturnHorizontalLine();
+            hugeString += "\n";
+            Console.Write(hugeString);
+
             foreach (Class p in Program.dl.classList)
             {
                 choices.Add(p.classShort);
-                Console.WriteLine("Name " + p.className);
-                Console.WriteLine();
-                Console.WriteLine("HP " + p.classBaseHP);
-                Console.Write("Str: " + p.classStrMod + " Agi: " + p.classAgiMod + "\n");
-                Console.Write("Con: " + p.classConMod + " Int: " + p.classIntMod + "\n");
-                Console.Write("Skills: ");
-                foreach (Skill ps in p.skillList)
-                {
-                    Console.Write(ps.skillName+ "  ");
-                }
-                Console.WriteLine();
-                Console.WriteLine("---------------------");
             }
-            Program.menu = new Menu(choices);
+            Program.menu = new Menu(choices, hugeString);
             int menuOption = Program.menu.Run();
             characterClass = Program.dl.classList[menuOption].Clone();
-            //string playerChoice = Program.ut.GetResponse("Please enter the name of the class you choose to be:", choices.ToArray()).ToLower();
-            //foreach (Class p in Program.dl.classList)
-            //{
-            //    if (p.className.ToLower() == playerChoice)
-            //    {
-            //        characterClass = p.Clone();
-            //    }
-            //}
             Program.ut.TypeLine("Congratulations! You are now a mighty " + characterClass.className);
             baseHP = characterClass.classBaseHP;
             hp = characterClass.classBaseHP;
@@ -150,25 +193,48 @@ namespace ConsoleRPG
         {
             System.Threading.Thread.Sleep(250);
             Console.Clear();
-            Console.WriteLine("Mighty "+characterClass.className + " "+ name + "! Please select your weapon of choice.");
+            List<Weapon> tempWeaponList = Program.dl.playerWeaponList;
+            string hugeString = "";
+            hugeString += "Mighty " + characterClass.className + " " + name + "! Please select your weapon of choice.\n";
             List<string> choices = new List<string>();
+            int tempLength = tempWeaponList.Count;
+
+            for (int i = 0; i <= tempLength - 1; i += 3)
+            {
+                if ((tempLength - i) / 3 >= 1)
+                {
+                    hugeString += Program.ut.ReturnHorizontalLine();
+                    hugeString += (Program.ut.expandString(tempWeaponList[i].name, 24) + "|" + Program.ut.expandString(tempWeaponList[i + 1].name, 24) + "|" + Program.ut.expandString(tempWeaponList[i + 2].name, 24) + "\n");
+                    hugeString += (Program.ut.expandString("Damage: " + tempWeaponList[i].dmgMin + "-" + tempWeaponList[i].dmgMax, 24) + "|" + Program.ut.expandString("Damage: " + tempWeaponList[i+1].dmgMin + "-" + tempWeaponList[i+1].dmgMax, 24) + "|" + Program.ut.expandString("Damage: " + tempWeaponList[i+2].dmgMin + "-" + tempWeaponList[i+2].dmgMax, 24) + "\n");
+                    hugeString += (Program.ut.expandString("Critical: " + tempWeaponList[i].critChance + "% dmg x" + tempWeaponList[i].critMult, 24) + "|" + Program.ut.expandString("Critical: " + tempWeaponList[i+1].critChance + "% dmg x" + tempWeaponList[i+1].critMult, 24) + "|" + Program.ut.expandString("Critical: " + tempWeaponList[i+2].critChance + "% dmg x" + tempWeaponList[i+2].critMult, 24) + "\n");
+
+                }
+                else if ((tempLength - i) % 3 == 2)
+                {
+                    hugeString += Program.ut.ReturnHorizontalLine();
+                    hugeString += (Program.ut.expandString(tempWeaponList[i].name, 24) + "|" + Program.ut.expandString(tempWeaponList[i + 1].name, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("Damage: " + tempWeaponList[i].dmgMin + "-" + tempWeaponList[i].dmgMax, 24) + "|" + Program.ut.expandString("Damage: " + tempWeaponList[i + 1].dmgMin + "-" + tempWeaponList[i + 1].dmgMax, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("Critical: " + tempWeaponList[i].critChance + "% dmg x" + tempWeaponList[i].critMult, 24) + "|" + Program.ut.expandString("Critical: " + tempWeaponList[i + 1].critChance + "% dmg x" + tempWeaponList[i + 1].critMult, 24) + "|" + "\n");
+
+                }
+                else if ((tempLength - i) % 3 == 1)
+                {
+                    hugeString += Program.ut.ReturnHorizontalLine();
+                    hugeString += (Program.ut.expandString(tempWeaponList[i].name, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("Damage: " + tempWeaponList[i].dmgMin + "-" + tempWeaponList[i].dmgMax, 24) + "|" + "\n");
+                    hugeString += (Program.ut.expandString("Critical: " + tempWeaponList[i].critChance + "% dmg x" + tempWeaponList[i].critMult, 24) + "|" + "\n");
+                }
+            }
+            hugeString += Program.ut.ReturnHorizontalLine();
+            hugeString += "\n";
+            Console.Write(hugeString);
             foreach (Weapon w in Program.dl.playerWeaponList)
             {
                 choices.Add(w.wpShort);
-                Console.WriteLine(w.name + " doing " + w.dmgMin + " to " + w.dmgMax + " damage. Crit Chance: "+w.critChance+" for "+w.critMult+" times damage.");
-                Console.WriteLine("---------------------");
             }
-            Program.menu = new Menu(choices);
+            Program.menu = new Menu(choices, hugeString);
             int menuOption = Program.menu.Run();
             playerWeapon = Program.dl.playerWeaponList[menuOption].Clone();
-            /*string playerChoice = Program.ut.GetResponse("Please enter the name of your weapon of choice:", choices.ToArray()).ToLower();
-            foreach (Weapon w in Program.dl.playerWeaponList)
-            {
-                if (w.name.ToLower() == playerChoice)
-                {
-                    playerWeapon = w.Clone();
-                }
-            }*/
             Program.ut.TypeLine("You have chosen to wield a " + playerWeapon.name + ". It does " + playerWeapon.dmgMin + " to " + playerWeapon.dmgMax + " damage.");
             Program.ut.EnterToCont();
             Console.Clear();
@@ -187,23 +253,33 @@ namespace ConsoleRPG
         {
             if (!isStunned)
             {
-                Console.WriteLine("What do you do?");
-                Console.WriteLine("(A)ttack with your weapon(default action), use a (S)kill, view (C)haracter sheet or view (E)nemy character sheet.");
-                string playerInput = Console.ReadLine();
-                if (playerInput.ToLower() == "c")
+                //Console.WriteLine("What do you do?");
+                List<string> choices = new List<string>();
+                choices.Add("Attack with your weapon(default action)");
+                choices.Add("Use a skill");
+                choices.Add("View character sheet");
+                choices.Add("View enemy character sheet");
+                Program.menu = new Menu(choices, "What do you do?\n");
+                int menuOption = Program.menu.Run();
+                //Console.WriteLine("(A)ttack with your weapon(default action), use a (S)kill, view (C)haracter sheet or view (E)nemy character sheet.");
+                //string playerInput = Console.ReadLine();
+                //if (playerInput.ToLower() == "c")
+                if (menuOption == 2)
                 {
                     ViewPlayerCharacterSheet();
                 }
-                if (playerInput.ToLower() == "e")
+                //if (playerInput.ToLower() == "e")
+                if (menuOption == 3)
                 {
                     ViewEnemyCharacterSheet();
                 }
-
-                if (playerInput.ToLower() == "s")
+                //if (playerInput.ToLower() == "s")
+                if (menuOption == 1)
                 {
                     PlayerUseSkill();
                 }
-                if (playerInput.ToLower() == "a" || playerInput == "")
+                //if (playerInput.ToLower() == "a" || playerInput == "")
+                if (menuOption == 0)
                 {
                     PlayerAttack();
                 }
