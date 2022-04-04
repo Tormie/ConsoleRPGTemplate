@@ -86,20 +86,23 @@ namespace ConsoleRPG
             List<string> choices = new List<string>();
             foreach (Race p in Program.dl.raceList)
             {
-                choices.Add(p.raceName);
+                choices.Add(p.raceShort);
                 Console.WriteLine("Name " + p.raceName);
                 Console.Write("Str: " + p.raceStrMod + " Agi: " + p.raceAgiMod + "\n");
                 Console.Write("Con: " + p.raceConMod + " Int: " + p.raceIntMod + "\n");
                 Console.WriteLine("---------------------");
             }
-            string playerChoice = Program.ut.GetResponse("Please enter the name of the race you choose to be:", choices.ToArray()).ToLower();
-            foreach (Race p in Program.dl.raceList)
-            {
-                if (p.raceName.ToLower() == playerChoice)
-                {
-                    characterRace = p.Clone();
-                }
-            }
+            Program.menu = new Menu(choices);
+            int menuOption = Program.menu.Run();
+            characterRace = Program.dl.raceList[menuOption].Clone();
+            //string playerChoice = Program.ut.GetResponse("Please enter the name of the race you choose to be:", choices.ToArray()).ToLower();
+            //foreach (Race p in Program.dl.raceList)
+            //{
+            //    if (p.raceName.ToLower() == playerChoice)
+            //    {
+            //        characterRace = p.Clone();
+            //    }
+            //}
             Program.ut.TypeLine("You chose to be a " + characterRace.raceName);
             Program.ut.EnterToCont();
         }
@@ -112,7 +115,7 @@ namespace ConsoleRPG
             List<string> choices = new List<string>();
             foreach (Class p in Program.dl.classList)
             {
-                choices.Add(p.className);
+                choices.Add(p.classShort);
                 Console.WriteLine("Name " + p.className);
                 Console.WriteLine();
                 Console.WriteLine("HP " + p.classBaseHP);
@@ -126,14 +129,17 @@ namespace ConsoleRPG
                 Console.WriteLine();
                 Console.WriteLine("---------------------");
             }
-            string playerChoice = Program.ut.GetResponse("Please enter the name of the class you choose to be:", choices.ToArray()).ToLower();
-            foreach (Class p in Program.dl.classList)
-            {
-                if (p.className.ToLower() == playerChoice)
-                {
-                    characterClass = p.Clone();
-                }
-            }
+            Program.menu = new Menu(choices);
+            int menuOption = Program.menu.Run();
+            characterClass = Program.dl.classList[menuOption].Clone();
+            //string playerChoice = Program.ut.GetResponse("Please enter the name of the class you choose to be:", choices.ToArray()).ToLower();
+            //foreach (Class p in Program.dl.classList)
+            //{
+            //    if (p.className.ToLower() == playerChoice)
+            //    {
+            //        characterClass = p.Clone();
+            //    }
+            //}
             Program.ut.TypeLine("Congratulations! You are now a mighty " + characterClass.className);
             baseHP = characterClass.classBaseHP;
             hp = characterClass.classBaseHP;

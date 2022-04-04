@@ -12,6 +12,7 @@ namespace ConsoleRPG
         /*  Init classes and several base vars */
         public static Utils ut = new Utils();
         public static DataLib dl = new DataLib();
+        public static Menu menu;
         public static Player player;
         public static List<Encounter> gameEncounters;
         public static Encounter currentEncounter;

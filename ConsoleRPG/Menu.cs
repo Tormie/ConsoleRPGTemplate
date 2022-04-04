@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace ConsoleRPG
 {
     public class Menu
     {
-        public string[] menuOptions;
+        public List<string> menuOptions = new List<string>();
         public int selectedOption = 0;
 
-        public Menu(string[] options)
+        public Menu(List<string> options)
         {
             menuOptions = options;
         }
@@ -20,19 +21,19 @@ namespace ConsoleRPG
                 if (keyInfo.Key == ConsoleKey.DownArrow)
                 {
                     selectedOption++;
-                    if (selectedOption > menuOptions.Length - 1) { selectedOption = 0; }
+                    if (selectedOption > menuOptions.Count - 1) { selectedOption = 0; }
                 }
                 if (keyInfo.Key == ConsoleKey.UpArrow)
                 {
                     selectedOption--;
-                    if (selectedOption < 0) { selectedOption = menuOptions.Length - 1; }
+                    if (selectedOption < 0) { selectedOption = menuOptions.Count - 1; }
                 }
                 if (keyInfo.Key == ConsoleKey.Enter)
                 {
                     return selectedOption;
                 }
                 Console.Clear();
-                for (int i = 0; i < menuOptions.Length; i++)
+                for (int i = 0; i < menuOptions.Count; i++)
                 {
                     Console.ResetColor();
                     if (i == selectedOption)
