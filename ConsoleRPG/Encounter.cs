@@ -171,7 +171,38 @@ namespace ConsoleRPG
 
         public void RunChanceEncounter()
         {
-
+            Random rnd = new Random();
+            int roll = rnd.Next(1, 101);
+            if (!String.IsNullOrEmpty(chanceEffect3))
+            {
+                if (roll <= percentageChance1)
+                {
+                    // Print string for option 1
+                    // Activate event for option 1
+                }
+                else if (roll > percentageChance1 && roll <= percentageChance1+percentageChance2)
+                {
+                    // Print string for option 2
+                    // Activate event for option 2
+                }
+                else if (roll > percentageChance1 + percentageChance2)
+                {
+                    // Print string for option 3
+                    // Activate event for option 3
+                }
+            } else
+            {
+                if (roll <= percentageChance1)
+                {
+                    // Print string for option 1
+                    // Activate event for option 1
+                }
+                else if (roll > percentageChance1)
+                {
+                    // Print string for option 2
+                    // Activate event for option 2
+                }
+            }
         }
 
         public void RunEncounter()
