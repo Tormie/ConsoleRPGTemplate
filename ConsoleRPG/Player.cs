@@ -10,7 +10,7 @@ namespace ConsoleRPG
 {
     public class Player : Character
     {
-        public Weapon playerWeapon = null;
+        //public Weapon playerWeapon = null;
         public int playerDamageMod = 1;
         public int playerXP = 0;
         int statBoostRate = 3;
@@ -377,7 +377,7 @@ namespace ConsoleRPG
                                         {
                                             if (e.hp > 0)
                                             {
-                                                Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.wieldedWeapon.name + ")");
+                                                Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.weapon.name + ")");
                                             }
                                         }
                                         string playerInput = Console.ReadLine();
@@ -414,7 +414,7 @@ namespace ConsoleRPG
                 {
                     if (e.hp > 0)
                     {
-                        Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.wieldedWeapon.name + ")");
+                        Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.weapon.name + ")");
                     }
                 }
                 playerInput = Console.ReadLine();
@@ -484,7 +484,7 @@ namespace ConsoleRPG
                 {
                     if (e.hp > 0)
                     {
-                        Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.wieldedWeapon.name + ")");
+                        Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.weapon.name + ")");
                     }
                 }
                 playerInput = Console.ReadLine();

@@ -186,7 +186,7 @@ namespace ConsoleRPG
                         case "standard":
                             Program.ut.TypeLine(instigator.name + " " + skillUseText);
                             Random wpnRnd = new Random();
-                            int wpdmg = wpnRnd.Next(instEnemy.wieldedWeapon.dmgMin, instEnemy.wieldedWeapon.dmgMax + 1);
+                            int wpdmg = wpnRnd.Next(instEnemy.weapon.dmgMin, instEnemy.weapon.dmgMax + 1);
                             damage = skillPower * Math.Clamp(wpdmg + instEnemy.meleeDmgMod, 1, 20);
                             Console.WriteLine(target.name + " takes " + damage + " damage from the " + skillName);
                             target.TakeDamage(damage);

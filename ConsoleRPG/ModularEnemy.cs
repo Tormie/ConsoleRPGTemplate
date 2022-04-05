@@ -5,7 +5,7 @@ namespace ConsoleRPG
 {
     public class ModularEnemy : Character
     {
-        public Weapon wieldedWeapon;
+        //public Weapon wieldedWeapon;
         public int hpPerLvl = 1;
         public int dmgMod = 0;
         public int dmgModPerLevel = 1;
@@ -65,7 +65,7 @@ namespace ConsoleRPG
         void InitWeapon()
         {
             Random rnd = new Random();
-            wieldedWeapon = Program.dl.playerWeaponList[rnd.Next(0, Program.dl.playerWeaponList.Count)];
+            weapon = Program.dl.playerWeaponList[rnd.Next(0, Program.dl.playerWeaponList.Count)];
         }
 
         public override void Die()
@@ -118,12 +118,12 @@ namespace ConsoleRPG
             else
             {
                 Random hitPct = new Random();
-                Program.ut.TypeLine("The " + name + "(" + level + ") takes a swing at you with its " + wieldedWeapon.name + "!");
+                Program.ut.TypeLine("The " + name + "(" + level + ") takes a swing at you with its " + weapon.name + "!");
                 if (hitPct.Next(0, 101) <= Math.Clamp(hitChance + (hitChancePerLevel * (level - 1)), 0, 100))
                 {
                     Random wpDamage = new Random();
 
-                    int dmg = wpDamage.Next(wieldedWeapon.dmgMin, wieldedWeapon.dmgMax + 1) + dmgMod;
+                    int dmg = wpDamage.Next(weapon.dmgMin, weapon.dmgMax + 1) + dmgMod;
                     Program.ut.TypeLine("It hits you for " + dmg + " damage!");
                     Program.player.TakeDamage(dmg);
                 }

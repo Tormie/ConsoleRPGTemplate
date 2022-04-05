@@ -125,8 +125,8 @@ namespace ConsoleRPG
                 {
                     if (e.hp > 0)
                     {
-                        Console.WriteLine(e.name + "(" + e.level + ") (" + e.wieldedWeapon.name + "(" + (e.wieldedWeapon.dmgMin + e.dmgMod) + "-"
-                            + (e.wieldedWeapon.dmgMax + e.dmgMod) + "(" + e.hitChance + "%)): " + e.hp + " /" + e.baseHP);
+                        Console.WriteLine(e.name + "(" + e.level + ") (" + e.weapon.name + "(" + (e.weapon.dmgMin + e.dmgMod) + "-"
+                            + (e.weapon.dmgMax + e.dmgMod) + "(" + e.hitChance + "%)): " + e.hp + " /" + e.baseHP);
                         Console.WriteLine("---------------------");
                     }
                 }
