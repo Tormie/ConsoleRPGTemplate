@@ -43,6 +43,8 @@ namespace ConsoleRPG
         public bool isAlive = true;
         public int level = 1;
 
+        public Weapon weapon;
+
         /*  Initialize derivative stats based on base stats. */
         public void SetStats()
         {

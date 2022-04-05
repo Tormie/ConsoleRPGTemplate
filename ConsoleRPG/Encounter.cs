@@ -116,7 +116,7 @@ namespace ConsoleRPG
             {
                 Console.WriteLine("Player: " + Program.player.hp + "/" + Program.player.baseHP);
                 Console.WriteLine("Level: " + Program.player.level);
-                Console.WriteLine("Weapon: " + Program.player.playerWeapon.name + "(" + Program.player.playerWeapon.dmgMin + "-" + Program.player.playerWeapon.dmgMax +
+                Console.WriteLine("Weapon: " + Program.player.weapon.name + "(" + Program.player.weapon.dmgMin + "-" + Program.player.weapon.dmgMax +
                     "). Damage Modifier: " + Program.player.playerDamageMod);
                 Console.WriteLine("-----------");
                 Console.WriteLine("| Enemies |");
@@ -192,20 +192,20 @@ namespace ConsoleRPG
                 switch (menuOption)
                 {
                     case 0:
-                        Program.player.playerWeapon.dmgMin++;
-                        Program.player.playerWeapon.dmgMax++;
-                        Program.player.playerWeapon.level++;
-                        Program.player.playerWeapon.name = Program.player.playerWeapon.baseName + " +" + Program.player.playerWeapon.level;
+                        Program.player.weapon.dmgMin++;
+                        Program.player.weapon.dmgMax++;
+                        Program.player.weapon.level++;
+                        Program.player.weapon.name = Program.player.weapon.baseName + " +" + Program.player.weapon.level;
                         break;
                     case 1:
-                        Program.player.playerWeapon.critChance += 5;
-                        Program.player.playerWeapon.level++;
-                        Program.player.playerWeapon.name = Program.player.playerWeapon.baseName + " +" + Program.player.playerWeapon.level;
+                        Program.player.weapon.critChance += 5;
+                        Program.player.weapon.level++;
+                        Program.player.weapon.name = Program.player.weapon.baseName + " +" + Program.player.weapon.level;
                         break;
                     case 2:
-                        Program.player.playerWeapon.critMult++;
-                        Program.player.playerWeapon.level++;
-                        Program.player.playerWeapon.name = Program.player.playerWeapon.baseName + " +" + Program.player.playerWeapon.level;
+                        Program.player.weapon.critMult++;
+                        Program.player.weapon.level++;
+                        Program.player.weapon.name = Program.player.weapon.baseName + " +" + Program.player.weapon.level;
                         break;
                 }
             }

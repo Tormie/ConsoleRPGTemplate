@@ -82,12 +82,12 @@ namespace ConsoleRPG
                             case "standard":
                                 Program.ut.TypeLine(instigator.name + " " + skillUseText);
                                 Random wpnRnd = new Random();
-                                int wpdmg = wpnRnd.Next(Program.player.playerWeapon.dmgMin, Program.player.playerWeapon.dmgMax + 1);
+                                int wpdmg = wpnRnd.Next(Program.player.weapon.dmgMin, Program.player.weapon.dmgMax + 1);
                                 damage = skillPower * Math.Clamp(wpdmg + Program.player.meleeDmgMod, 1, 20);
                                 foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
                                 {
-                                    e.TakeDamage(damage);
                                     Console.WriteLine(e.name + " takes " + damage + " damage from the " + skillName);
+                                    e.TakeDamage(damage);
                                 }
                                 coolDownTimer = skillCooldown;
                                 break;
@@ -96,8 +96,8 @@ namespace ConsoleRPG
                                 damage = skillPower * Math.Clamp(Program.player.magicDmgMod, 1, 10);
                                 foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
                                 {
-                                    e.TakeDamage(damage);
                                     Console.WriteLine(e.name + " takes " + damage + " damage from the " + skillName);
+                                    e.TakeDamage(damage);
                                 }
                                 coolDownTimer = skillCooldown;
                                 break;
@@ -105,9 +105,9 @@ namespace ConsoleRPG
                                 Program.ut.TypeLine(instigator.name + " " + skillUseText);
                                 foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
                                 {
+                                    Console.WriteLine(e.name + " is stunned for "+skillPower+ " turns.");
                                     e.stunDuration =skillPower;
                                     e.isStunned = true;
-                                    Console.WriteLine(e.name + " is stunned for "+skillPower+ " turns.");
                                 }
                                 coolDownTimer = skillCooldown;
                                 break;
@@ -120,24 +120,24 @@ namespace ConsoleRPG
                             case "standard":
                                 Program.ut.TypeLine(instigator.name + " " +skillUseText);
                                 Random wpnRnd = new Random();
-                                int wpdmg = wpnRnd.Next(Program.player.playerWeapon.dmgMin, Program.player.playerWeapon.dmgMax + 1);
+                                int wpdmg = wpnRnd.Next(Program.player.weapon.dmgMin, Program.player.weapon.dmgMax + 1);
                                 damage = skillPower * Math.Clamp(wpdmg + Program.player.meleeDmgMod, 1, 20);
-                                target.TakeDamage(damage);
                                 Console.WriteLine(target.name + " takes " + damage + " damage from the " + skillName);
+                                target.TakeDamage(damage);
                                 coolDownTimer = skillCooldown;
                                 break;
                             case "magic":
                                 Program.ut.TypeLine(instigator.name + " " + skillUseText);
                                 damage = skillPower * Math.Clamp(Program.player.magicDmgMod, 1, 10);
-                                target.TakeDamage(damage);
                                 Console.WriteLine(target.name + " takes " + damage + " damage from the " + skillName);
+                                target.TakeDamage(damage);
                                 coolDownTimer = skillCooldown;
                                 break;
                             case "stun":
                                 Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                                Console.WriteLine(target.name + " is stunned for " + skillPower + " turns.");
                                 target.stunDuration = skillPower;
                                 target.isStunned = true;
-                                Console.WriteLine(target.name + " is stunned for " + skillPower + " turns.");
                                 coolDownTimer = skillCooldown;
                                 break;
                         }
@@ -188,22 +188,22 @@ namespace ConsoleRPG
                             Random wpnRnd = new Random();
                             int wpdmg = wpnRnd.Next(instEnemy.wieldedWeapon.dmgMin, instEnemy.wieldedWeapon.dmgMax + 1);
                             damage = skillPower * Math.Clamp(wpdmg + instEnemy.meleeDmgMod, 1, 20);
-                            target.TakeDamage(damage);
                             Console.WriteLine(target.name + " takes " + damage + " damage from the " + skillName);
+                            target.TakeDamage(damage);
                             coolDownTimer = skillCooldown;
                             break;
                         case "magic":
                             Program.ut.TypeLine(instigator.name + " " + skillUseText);
                             damage = skillPower * Math.Clamp(instEnemy.magicDmgMod, 1, 10);
-                            target.TakeDamage(damage);
                             Console.WriteLine(target.name + " takes " + damage + " damage from the " + skillName);
+                            target.TakeDamage(damage);
                             coolDownTimer = skillCooldown;
                             break;
                         case "stun":
                             Program.ut.TypeLine(instigator.name + " " + skillUseText);
+                            Console.WriteLine(target.name + " is stunned for " + skillPower + " turns.");
                             target.stunDuration = skillPower;
                             target.isStunned = true;
-                            Console.WriteLine(target.name + " is stunned for " + skillPower + " turns.");
                             coolDownTimer = skillCooldown;
                             break;
                     } 

@@ -67,7 +67,7 @@ namespace ConsoleRPG
             Console.WriteLine("Constitution: " + target.constitution + "   Hit Points Per Level: " + target.hpMod);
             Console.WriteLine("Intelligence: " + target.intelligence + "   Magic Damage modifier: " + target.magicDmgMod);
             PrintHorizontalLine();
-            Console.WriteLine("Weapon:       " + target.playerWeapon.name + "   Damage: " + target.playerWeapon.dmgMin + "-" + target.playerWeapon.dmgMax + " (" + target.playerWeapon.critChance + "%) for x" + target.playerWeapon.critMult + " damage");
+            Console.WriteLine("Weapon:       " + target.weapon.name + "   Damage: " + target.weapon.dmgMin + "-" + target.weapon.dmgMax + " (" + target.weapon.critChance + "%) for x" + target.weapon.critMult + " damage");
             PrintHorizontalLine();
             Console.WriteLine("Skills(damage type)");
             Console.WriteLine();

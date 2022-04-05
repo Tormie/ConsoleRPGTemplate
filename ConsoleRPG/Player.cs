@@ -240,8 +240,8 @@ namespace ConsoleRPG
             }
             Program.menu = new Menu(choices, hugeString);
             int menuOption = Program.menu.Run();
-            playerWeapon = Program.dl.playerWeaponList[menuOption].Clone();
-            Program.ut.TypeLine("You have chosen to wield a " + playerWeapon.name + ". It does " + playerWeapon.dmgMin + " to " + playerWeapon.dmgMax + " damage.");
+            weapon = Program.dl.playerWeaponList[menuOption].Clone();
+            Program.ut.TypeLine("You have chosen to wield a " + weapon.name + ". It does " + weapon.dmgMin + " to " + weapon.dmgMax + " damage.");
             Program.ut.EnterToCont();
             Console.Clear();
         }
@@ -403,7 +403,7 @@ namespace ConsoleRPG
             ModularEnemy target = null;
             bool bCrit = false;
             Random crit = new Random();
-            if (crit.Next(1, 101) <= playerWeapon.critChance)
+            if (crit.Next(1, 101) <= weapon.critChance)
             {
                 bCrit = true;
             }
@@ -439,17 +439,17 @@ namespace ConsoleRPG
             }
             else
             {
-                Program.ut.TypeLine("You attack " + target.name + " with your " + playerWeapon.name);
+                Program.ut.TypeLine("You attack " + target.name + " with your " + weapon.name);
                 Random rnd = new Random();
                 int damage;
                 if (bCrit == true)
                 {
-                    damage = (rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod) * playerWeapon.critMult;
+                    damage = (rnd.Next(weapon.dmgMin, weapon.dmgMax + 1) + meleeDmgMod) * weapon.critMult;
                     Program.ut.TypeLine("You score a critical hit, dealing " + damage + " points of damage to the " + target.name);
                 }
                 else
                 {
-                    damage = rnd.Next(playerWeapon.dmgMin, playerWeapon.dmgMax + 1) + meleeDmgMod;
+                    damage = rnd.Next(weapon.dmgMin, weapon.dmgMax + 1) + meleeDmgMod;
                     Program.ut.TypeLine("You hit " + target.name + " for " + damage + " points of damage");
                 }
                 target.TakeDamage(damage);
