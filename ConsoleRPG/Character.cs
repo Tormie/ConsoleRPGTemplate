@@ -79,7 +79,6 @@ namespace ConsoleRPG
         /*  Handles skill and status effect cooldowns */
         public void TurnManager()
         {
-            Console.WriteLine("Turnmanager Run on "+name);
             foreach (Skill s in characterClass.skillList)
             {
                 if (s.coolDownTimer > 0)

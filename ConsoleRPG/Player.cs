@@ -34,36 +34,42 @@ namespace ConsoleRPG
             Console.Clear();
             level++;
             Random msg = new Random();
+            string bigMessage = "";
+            bigMessage += (Program.dl.levelUpMessages[msg.Next(0, Program.dl.levelUpMessages.Count)]);
             Program.ut.TypeLine(Program.dl.levelUpMessages[msg.Next(0, Program.dl.levelUpMessages.Count)]);
+            bigMessage += ("You have reached level " + level + ". Your HP has increased to " + hp + ".");
             Program.ut.TypeLine("You have reached level " + level + ". Your HP has increased to " + hp + ".");
             if (level % statBoostRate == 0)
             {
-                IncreaseStats();
+                IncreaseStats(bigMessage);
             }
             SetStats();
             Program.ut.EnterToCont();
         }
 
-        public void IncreaseStats()
+        public void IncreaseStats(string message)
         {
             List<string> choices = new List<string>();
             choices.Add("Strength");
             choices.Add("Agility");
             choices.Add("Constitution");
             choices.Add("Intelligence");
-            string playerChoice = Program.ut.GetResponse("Please select a stat to increase:", choices.ToArray()).ToLower();
-            switch (playerChoice.ToLower())
+            message += "Please select a stat to increase:\n";
+            Console.WriteLine("Please select a stat to increase:\n");
+            Program.menu = new Menu(choices, message);
+            int menuOption = Program.menu.Run();
+            switch (menuOption)
             {
-                case "strength":
+                case 0:
                     strLvlMod++;
                     break;
-                case "agility":
+                case 1:
                     agLvlMod++;
                     break;
-                case "constitution":
+                case 2:
                     conLvlMod++;
                     break;
-                case "intelligence":
+                case 3:
                     intLvlMod++;
                     break;
             }

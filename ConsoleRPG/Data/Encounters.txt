@@ -4,5 +4,5 @@
 / You can use the / symbol to add commentary to this file.
 Ambush;You walk into a dimly lit cave, cautious as ever you proceed slowly. Suddenly you see movement, enemies appear!;Ambush flavor outtro text!;true
 Brigand Camp; While exploring the forest you run into a well defended brigand camp. You decide to rid the world of these pests.;Brigand camp outtro text!;true
-Healing spring;Healing spring flavor intro text!;Healing spring flavor outtro text!;healing;50
-Ethereal Blacksmith;Upgrade flavor intro text!;Upgrade flavor outtro text!;upgrade;1
+Healing spring;When you walk into the cave you feel the warmth of healing energies.;You feel your wounds close and your energy restored. You are healed for 50 hit points.;healing;50
+Ethereal Blacksmith;You encounter the pale ghost of a blacksmith. It offers you a choice: Upgrade your weapon damage, critical chance or critical damage.;A forge materializes out of thin air, the ghost takes your weapon and unleashes his smithing magic upon it. Your weapon has been improved!;upgrade;1

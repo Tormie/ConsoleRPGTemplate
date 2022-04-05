@@ -169,6 +169,48 @@ namespace ConsoleRPG
             }
         }
 
+        public void RunChanceEncounter()
+        {
+
+        }
+
+        public void RunEncounter()
+        {
+            if (result == "healing")
+            {
+                Program.player.TakeDamage(-resultStrength);
+            }
+            if (result == "upgrade")
+            {
+                List<string> choices = new List<string>();
+                choices.Add("Damage +1");
+                choices.Add("Critical Chance + 5");
+                choices.Add("Critical Damage + 1");
+                Console.WriteLine("Please select a stat to increase:\n");
+                Program.menu = new Menu(choices, "Please select a stat to increase:\n");
+                int menuOption = Program.menu.Run();
+                switch (menuOption)
+                {
+                    case 0:
+                        Program.player.playerWeapon.dmgMin++;
+                        Program.player.playerWeapon.dmgMax++;
+                        Program.player.playerWeapon.level++;
+                        Program.player.playerWeapon.name = Program.player.playerWeapon.baseName + " +" + Program.player.playerWeapon.level;
+                        break;
+                    case 1:
+                        Program.player.playerWeapon.critChance += 5;
+                        Program.player.playerWeapon.level++;
+                        Program.player.playerWeapon.name = Program.player.playerWeapon.baseName + " +" + Program.player.playerWeapon.level;
+                        break;
+                    case 2:
+                        Program.player.playerWeapon.critMult++;
+                        Program.player.playerWeapon.level++;
+                        Program.player.playerWeapon.name = Program.player.playerWeapon.baseName + " +" + Program.player.playerWeapon.level;
+                        break;
+                }
+            }
+        }
+
         public void Run()
         {
             Initialize();
@@ -177,10 +219,19 @@ namespace ConsoleRPG
             {
                 RunModularCombatEncounter();
                 Program.ut.TypeLine(encounterOuttro);
+                Program.ut.EnterToCont();
+            }
+            else if (isChanceEncounter == true)
+            {
+                RunChanceEncounter();
+                Program.ut.TypeLine(encounterOuttro);
+                Program.ut.EnterToCont();
             }
             else
             {
+                RunEncounter();
                 Program.ut.TypeLine(encounterOuttro);
+                Program.ut.EnterToCont();
             }
             Program.encountersWon++;
         }

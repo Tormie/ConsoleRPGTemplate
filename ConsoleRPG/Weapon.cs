@@ -13,11 +13,14 @@ namespace ConsoleRPG
         public int critChance;
         public int critMult;
         public string name;
+        public string baseName;
         public string wpShort;
+        public int level = 0;
 
         public Weapon(string wName, int minDmg, int maxDmg, int critC, int critD)
         {
             name = wName;
+            baseName = name;
             dmgMin = minDmg;
             dmgMax = maxDmg;
             critChance = critC;

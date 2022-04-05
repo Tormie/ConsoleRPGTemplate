@@ -71,10 +71,11 @@ namespace ConsoleRPG
         public override void Die()
         {
             Program.ut.TypeLine(name + " cries out in agony as it dies");
+            Program.ut.TypeLine("You gain " + xpValue + " experience points.");
+            Program.ut.EnterToCont();
             Program.player.gainXP(xpValue);
             Program.currentEncounter.modEnemyList.Remove(this);
             Program.monstersDefeated++;
-            Console.WriteLine("You gain " + xpValue + " experience points.");
             isAlive = false;
         }
 
