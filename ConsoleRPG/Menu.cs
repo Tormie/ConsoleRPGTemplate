@@ -29,6 +29,7 @@ namespace ConsoleRPG
 
         public int Run()
         {
+            Console.ResetColor();
             PrintInit();
             ConsoleKeyInfo keyInfo;
             do
@@ -57,6 +58,11 @@ namespace ConsoleRPG
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                     }
+                    else
+                    {
+                        Console.ResetColor();
+                    } 
+                        
                     Console.WriteLine(menuOptions[i]);
                 }
             } while (keyInfo.Key != ConsoleKey.X);

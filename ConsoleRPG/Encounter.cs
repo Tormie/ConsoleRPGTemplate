@@ -12,6 +12,7 @@ namespace ConsoleRPG
         public string encounterIntro = "";
         public int encounterLevel;
         public bool isCombatEncounter = false;
+        
         public List<ModularEnemy> modEnemyList;
         int enemyHP = 0;
         public bool enemiesDefeated = false;
@@ -19,6 +20,13 @@ namespace ConsoleRPG
         public string encounterOuttro;
         public string result;
         public int resultStrength;
+
+
+        //For a chance encounter with max 3 options.
+        public bool isChanceEncounter = false;
+        public string chanceResult1, chanceResult2, chanceResult3;
+        public string chanceEffect1, chanceEffect2, chanceEffect3;
+        public int percentageChance1, percentageChance2, percentageChance3;
 
         public Encounter(string eName, string eIntro, string eOuttro, bool isCombat)
         {
@@ -37,11 +45,33 @@ namespace ConsoleRPG
             resultStrength = eResStr;
         }
 
+        public Encounter(string eName, string eIntro, string eOuttro, string result1, string effect1, int chance1, string result2, string effect2, int chance2, string result3, string effect3, int chance3, bool isChance)
+        {
+            encounterName = eName;
+            encounterIntro = eIntro;
+            encounterOuttro = eOuttro;
+            chanceResult1 = result1;
+            chanceResult2 = result2;
+            chanceResult3 = result3;
+            chanceEffect1 = effect1;
+            chanceEffect2 = effect2;
+            chanceEffect3 = effect3;
+            percentageChance1 = chance1;
+            percentageChance2 = chance2;
+            percentageChance3 = chance3;
+            isChanceEncounter = isChance;
+        }
+
         public Encounter Clone()
         {
             if (isCombatEncounter == true)
             {
                 Encounter e = new Encounter(this.encounterName, this.encounterIntro, this.encounterOuttro, this.isCombatEncounter);
+                return e;
+            }
+            else if (isChanceEncounter == true)
+            {
+                Encounter e = new Encounter(this.encounterName, this.encounterIntro, this.encounterOuttro, this.chanceResult1, this.chanceEffect1, this.percentageChance1, this.chanceResult2, this.chanceEffect2, this.percentageChance2, this.chanceResult3, this.chanceEffect3, this.percentageChance3, this.isChanceEncounter);
                 return e;
             }
             else

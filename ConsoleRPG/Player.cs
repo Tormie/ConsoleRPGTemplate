@@ -118,7 +118,7 @@ namespace ConsoleRPG
             Console.Write(hugeString);
             foreach (Race p in Program.dl.raceList)
             {
-                choices.Add(p.raceShort);
+                choices.Add(p.raceName);
             }
             Program.menu = new Menu(choices, hugeString);
             int menuOption = Program.menu.Run();
@@ -178,7 +178,7 @@ namespace ConsoleRPG
 
             foreach (Class p in Program.dl.classList)
             {
-                choices.Add(p.classShort);
+                choices.Add(p.className);
             }
             Program.menu = new Menu(choices, hugeString);
             int menuOption = Program.menu.Run();
@@ -230,7 +230,7 @@ namespace ConsoleRPG
             Console.Write(hugeString);
             foreach (Weapon w in Program.dl.playerWeaponList)
             {
-                choices.Add(w.wpShort);
+                choices.Add(w.name);
             }
             Program.menu = new Menu(choices, hugeString);
             int menuOption = Program.menu.Run();
