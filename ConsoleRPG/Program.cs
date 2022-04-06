@@ -83,13 +83,6 @@ namespace ConsoleRPG
             }
         }
 
-        /*  Pretty straightforward, just in its own function for clarity */
-        static void PrintIntro()
-        {
-            ut.TypeLine("You walk into a dimly lit cave, cautious as ever you proceed slowly. \nSuddenly you see movement, monsters appear!");
-            ut.TypeLine("Suddenly you see movement, monsters appear!");
-        }
-
         /*  Sets up player character based on player input */
         static void InitiatePlayer()
         {

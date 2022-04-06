@@ -125,7 +125,6 @@ namespace ConsoleRPG
             {
                 result += "-";
             }
-            //result += "\n";
             return result;
         }
 

@@ -310,8 +310,6 @@ namespace ConsoleRPG
             ModularEnemy target = null;
             Console.WriteLine("Which skill do you want to use?(Type Back to return)");
             List<string> choices = new List<string>();
-            choices.Add("Back");
-            choices.Add("Kill");
             foreach (Skill s in characterClass.skillList)
             {
                 // List possible skill choices
@@ -398,7 +396,7 @@ namespace ConsoleRPG
 
         public void PlayerAttack()
         {
-            string playerInput;
+            //string playerInput;
             ModularEnemy target = null;
             bool bCrit = false;
             Random crit = new Random();
@@ -408,23 +406,43 @@ namespace ConsoleRPG
             }
             if (Program.currentEncounter.modEnemyList.Count > 1)
             {
-                Console.WriteLine("On which enemy?(Choose the number)");
+                List<string> choices = new List<string>();
                 foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
                 {
                     if (e.hp > 0)
                     {
-                        Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.weapon.name + ")");
+                        choices.Add(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.weapon.name + ")");
                     }
                 }
-                playerInput = Console.ReadLine();
-                int iTarget = Int32.Parse(playerInput);
-                target = Program.currentEncounter.modEnemyList[iTarget];
+                Program.menu = new Menu(choices, "Attack which enemy?\n");
+                int menuOption = Program.menu.Run();
+                for (int i = 0; i < choices.Count; i++)
+                {
+                    if (i == menuOption)
+                    {
+                        target = Program.currentEncounter.modEnemyList[i];
+                    }
+                }
+
+
+                //Console.WriteLine("On which enemy?(Choose the number)");
+                //foreach (ModularEnemy e in Program.currentEncounter.modEnemyList)
+                //{
+                //    if (e.hp > 0)
+                //    {
+                //        Console.WriteLine(Program.currentEncounter.modEnemyList.IndexOf(e) + " " + e.name + "(" + e.level + ") (" + e.weapon.name + ")");
+                //    }
+                //}
+                //playerInput = Console.ReadLine();
+                //int iTarget = Int32.Parse(playerInput);
+                //target = Program.currentEncounter.modEnemyList[iTarget];
             }
             else
             {
                 target = Program.currentEncounter.modEnemyList[0];
             }
             Console.Clear();
+
             if (target.isInvulnerable)
             {
                 if (target.invulType == "block")
