@@ -1,10 +1,10 @@
 / You can add skills to this file (Name, description, skill use flavor text, cooldown, damage multiplier, class, targets all, targets self, damage type) Don't remove this line
 / You can use the / symbol to add commentary to this file.
 Bash,Bash: Bash an enemy with terrible force - doing base * 5 damage. 2 turn cooldown.,barrels into the enemy using all their strength.,2,5,1,false,false,standard
-Block,Block: Block incoming damage using a shield. No cooldown.,expertly uses their shield to block the attack(s), 1, 0, 1, false, true,block
+Block,Block: Block incoming damage using a shield. No cooldown.,expertly uses their shield to block the attack(s), 1, 1, 1, false, true,block
 Firebolt,Fire bolt: calling up the arcane forces - you blast the enemy with a scorching firebolt - doing base * 4 damage. 1 turn cooldown.,throws a mighty firebolt.,1,4,2,false,false,magic
 FrostNova,Frost Nova: Freeze the enemy characters for 1 - 4 turns. 4 turn cooldown.,channels their inner chill to conjure up an expanding ring of ice. This freezes the enemies for several turns.,4,4,2,true,false,stun
 SneakAttack,Sneak Attack: Hide in the shadows to deliver a deadly attack upon an unsuspecting enemy. Doing base * 5 damage. 3 turn cool down.,strikes out at the enemy from the shadows.,3,5,3,false,false,standard
-Hide,Hide in Shadows: Hiding in the shadows you become undetectable and enemies can not attack you this turn.,disappears into the shadows with a swift whirl.,1,0,3,false,false,hide
+Hide,Hide in Shadows: Hiding in the shadows you become undetectable and enemies can not attack you this turn.,disappears into the shadows with a swift whirl.,1,1,3,false,false,hide
 Cleave,Cleave: Using all your strength - you cleave through all enemies - doing base damage. 3 turn cool down.,cleaves through all enemies with a mighty sweep.,3,1,4,true,false,standard
 Heal,Heal: Heals yourself for base * 5 hp. 3 turn cool down.,Channeling the positive energies - healing power flows through their body.,3,5,4,false,true,healing
