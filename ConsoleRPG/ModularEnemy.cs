@@ -19,9 +19,8 @@ namespace ConsoleRPG
         public ModularEnemy()
         {
             InitModularEnemy();
+            baseHP -= enemyHPmod;
             SetStats();
-            baseHP -= (enemyHPmod);
-            hp -= (enemyHPmod);
             hpMod = hpMod / 2;
             hitChance = Math.Clamp((baseHitChance + hitChancePerLevel * (level - 1) + toHitMod), 0, 100);
             InitWeapon();
@@ -55,8 +54,8 @@ namespace ConsoleRPG
 
         public void setLevel()
         {
-            baseHP = hp + hpMod * (level - 1);
-            hp = baseHP;
+            hp = hp + hpMod * (level - 1);
+            currentHP = hp;
             dmgMod = meleeDmgMod + dmgModPerLevel * (level - 1);
             hitChance = Math.Clamp((baseHitChance + hitChancePerLevel * (level - 1) + toHitMod),0,100);
             SetXP();

@@ -58,7 +58,7 @@ namespace ConsoleRPG
             Console.WriteLine("Name:         " + target.name + "   Level: " + target.level);
             Console.WriteLine("Race:         " + target.characterRace.raceName);
             Console.WriteLine("Class:        " + target.characterClass.className); 
-            Console.WriteLine("Hit Points:   " + target.hp + "/" + target.baseHP);
+            Console.WriteLine("Hit Points:   " + target.currentHP + "/" + target.hp);
             Console.WriteLine("Experience:   " + target.playerXP);
             PrintHorizontalLine();
             Console.WriteLine("Strength:     " + target.strength + "   Melee Damage modifier: " + target.meleeDmgMod);
@@ -87,7 +87,7 @@ namespace ConsoleRPG
         {
             PrintHorizontalLine();
             Console.WriteLine("Name:         " + target.name + "   Level: " + target.level);
-            Console.WriteLine("Hit Points:   " + target.hp + "/" + target.baseHP);
+            Console.WriteLine("Hit Points:   " + target.currentHP + "/" + target.hp);
             Console.WriteLine("XP value:     " + target.xpValue);
             PrintHorizontalLine();
             Console.WriteLine("Strength:     " + target.strength + "   Melee Damage modifier: " + target.meleeDmgMod);

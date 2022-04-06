@@ -37,13 +37,12 @@ namespace ConsoleRPG
             string bigMessage = "";
             bigMessage += (Program.dl.levelUpMessages[msg.Next(0, Program.dl.levelUpMessages.Count)]);
             Program.ut.TypeLine(Program.dl.levelUpMessages[msg.Next(0, Program.dl.levelUpMessages.Count)]);
-            bigMessage += ("You have reached level " + level + ". Your HP has increased to " + hp + ".");
-            Program.ut.TypeLine("You have reached level " + level + ". Your HP has increased to " + hp + ".");
             if (level % statBoostRate == 0)
             {
                 IncreaseStats(bigMessage);
             }
             SetStats();
+            Program.ut.TypeLine("You have reached level " + level + ". Your HP has increased to " + hp + ".");
             Program.ut.EnterToCont();
         }
 
@@ -191,7 +190,7 @@ namespace ConsoleRPG
             characterClass = Program.dl.classList[menuOption].Clone();
             Program.ut.TypeLine("Congratulations! You are now a mighty " + characterClass.className);
             baseHP = characterClass.classBaseHP;
-            hp = characterClass.classBaseHP;
+            SetStats();
             Program.ut.EnterToCont();
         }
 

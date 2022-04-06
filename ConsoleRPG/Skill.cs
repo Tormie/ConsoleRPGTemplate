@@ -67,7 +67,7 @@ namespace ConsoleRPG
                             Program.ut.TypeLine(instigator.name + " " + skillUseText);
                             Program.ut.TypeLine("You are healed for " + healPower + " hit points.");
                             target.TakeDamage(-healPower);
-                            if (target.hp > target.baseHP) { target.hp = target.baseHP; }
+                            if (target.currentHP > target.hp) { target.currentHP = target.hp; }
                             coolDownTimer = skillCooldown;
                             break;
                     }
@@ -173,7 +173,7 @@ namespace ConsoleRPG
                             Program.ut.TypeLine(instigator.name + " " + skillUseText);
                             Program.ut.TypeLine("You are healed for " + healPower + " hit points.");
                             instEnemy.TakeDamage(-healPower);
-                            if (instEnemy.hp > instEnemy.baseHP) { instEnemy.hp = instEnemy.baseHP; }
+                            if (instEnemy.currentHP > instEnemy.hp) { instEnemy.currentHP = instEnemy.hp; }
                             coolDownTimer = skillCooldown;
                             break;
                     }

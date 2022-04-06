@@ -106,7 +106,7 @@ namespace ConsoleRPG
             foreach (ModularEnemy m in modEnemyList)
             {
                 m.isAlive = true;
-                m.hp = m.baseHP;
+                m.currentHP = m.hp;
             }
         }
 
@@ -114,7 +114,7 @@ namespace ConsoleRPG
         {
             while (enemiesDefeated == false)
             {
-                Console.WriteLine("Player: " + Program.player.hp + "/" + Program.player.baseHP);
+                Console.WriteLine("Player: " + Program.player.currentHP + "/" + Program.player.hp);
                 Console.WriteLine("Level: " + Program.player.level);
                 Console.WriteLine("Weapon: " + Program.player.weapon.name + "(" + Program.player.weapon.dmgMin + "-" + Program.player.weapon.dmgMax +
                     "). Damage Modifier: " + Program.player.playerDamageMod);
@@ -126,7 +126,7 @@ namespace ConsoleRPG
                     if (e.hp > 0)
                     {
                         Console.WriteLine(e.name + "(" + e.level + ") (" + e.weapon.name + "(" + (e.weapon.dmgMin + e.dmgMod) + "-"
-                            + (e.weapon.dmgMax + e.dmgMod) + "(" + e.hitChance + "%)): " + e.hp + " /" + e.baseHP);
+                            + (e.weapon.dmgMax + e.dmgMod) + "(" + e.hitChance + "%)): " + e.currentHP + " /" + e.hp);
                         Console.WriteLine("---------------------");
                     }
                 }

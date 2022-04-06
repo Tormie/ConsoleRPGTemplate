@@ -38,6 +38,7 @@ namespace ConsoleRPG
         public bool turnComplete = false;
 
         public int hp;
+        public int currentHP;
         public int baseHP;
         public string name;
         public bool isAlive = true;
@@ -52,23 +53,27 @@ namespace ConsoleRPG
             agility = 5 + characterClass.classAgiMod + characterRace.raceAgiMod + agLvlMod;
             constitution = 5 + characterClass.classConMod + characterRace.raceConMod + conLvlMod;
             intelligence = 5 + characterClass.classIntMod + characterRace.raceIntMod + intLvlMod;
-
             meleeDmgMod = strength - 5;
             toHitMod = agility - 5;
             dodgeMod = agility - 5;
             hpMod = constitution - 5 + characterClass.classHPPerLevel;
             magicDmgMod = intelligence - 5;
-            baseHP = hp + hpMod * level;
-            hp = baseHP;
+            CalculateHP();
+        }
+
+        public void CalculateHP()
+        {
+            hp = baseHP + hpMod * level;
+            currentHP = hp;
         }
 
         /*  Pretty straightforward if you ask me */
         public void TakeDamage(int damage)
         {
-            hp -= damage;
-            if (hp <= 0)
+            currentHP -= damage;
+            if (currentHP <= 0)
             {
-                hp = 0;
+                currentHP = 0;
                 Die();
             }    
         }
@@ -81,6 +86,7 @@ namespace ConsoleRPG
         /*  Handles skill and status effect cooldowns */
         public void TurnManager()
         {
+            Console.WriteLine("Turnmanager run on "+name);
             foreach (Skill s in characterClass.skillList)
             {
                 if (s.coolDownTimer > 0)
