@@ -36,6 +36,7 @@ namespace ConsoleRPG
         public Class characterClass;
         public Race characterRace;
         public bool turnComplete = false;
+        public bool isEnemy = false;
 
         public int hp;
         public int currentHP;
@@ -86,7 +87,7 @@ namespace ConsoleRPG
         /*  Handles skill and status effect cooldowns */
         public void TurnManager()
         {
-            Console.WriteLine("Turnmanager run on "+name);
+            Program.ut.DebugLine("Turnmanager run on "+name);
             foreach (Skill s in characterClass.skillList)
             {
                 if (s.coolDownTimer > 0)

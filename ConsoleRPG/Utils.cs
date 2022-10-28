@@ -8,6 +8,27 @@ namespace ConsoleRPG
 {
     public class Utils
     {
+        public void DebugLine(string line)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(line);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        public void WarningLine(string line)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(line);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        public void ErrorLine(string line)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(line);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+
         public void TypeLine(string line)
         {
             for (int i = 0; i < line.Length; i++)

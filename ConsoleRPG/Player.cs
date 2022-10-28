@@ -18,6 +18,7 @@ namespace ConsoleRPG
         public Player(string pName)
         {
             name = pName;
+            isEnemy = false;
         }
 
         public void gainXP(int gainedXP)

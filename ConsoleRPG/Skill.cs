@@ -65,7 +65,14 @@ namespace ConsoleRPG
                             int healPower = instigator.magicDmgMod * skillPower;
                             healPower = Math.Clamp(healPower, 5, 100);
                             Program.ut.TypeLine(instigator.name + " " + skillUseText);
-                            Program.ut.TypeLine("You are healed for " + healPower + " hit points.");
+                            if (instigator.isEnemy)
+                            {
+                                Program.ut.TypeLine("They are healed for " + healPower + " hit points.");
+                            }
+                            else
+                            {
+                                Program.ut.TypeLine("You are healed for " + healPower + " hit points.");
+                            }
                             target.TakeDamage(-healPower);
                             if (target.currentHP > target.hp) { target.currentHP = target.hp; }
                             coolDownTimer = skillCooldown;

@@ -60,6 +60,7 @@ namespace ConsoleRPG
             }
             else if (answer == "n")
             {
+                gameOver = true;
                 return;
             }
         }
@@ -79,6 +80,7 @@ namespace ConsoleRPG
             }
             else if (answer == "n")
             {
+                gameOver = true;
                 return;
             }
         }

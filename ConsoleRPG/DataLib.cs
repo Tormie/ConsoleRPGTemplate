@@ -13,7 +13,7 @@ namespace ConsoleRPG
         public List<Class> classList;
         public List<Skill> skillList;
         public List<Encounter> encounterList;
-        public List<String> levelUpMessages;
+        public List<string> levelUpMessages;
         public List<Race> raceList;
 
         string dataFolder = @"../../../Data/";
