@@ -64,6 +64,7 @@ namespace ConsoleRPG
                     } 
                         
                     Console.WriteLine(menuOptions[i]);
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             } while (keyInfo.Key != ConsoleKey.X);
             return 0;
